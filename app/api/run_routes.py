@@ -32,7 +32,7 @@ def create_a_run():
             seed=form.seed.data
             )
         db.session.add(new_run)
-        db.commit()
+        db.session.commit()
         return new_run.to_dict()
     print(form.errors)
     return form.errors, 401

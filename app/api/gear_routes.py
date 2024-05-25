@@ -30,7 +30,7 @@ def Update_gear(char_id):
             gear.chest = form.chest.data
             gear.right = form.right.data
             gear.left = form.left.data
-            db.commit()
+            db.session.commit()
             return gear.to_dict()
         print(form.errors)
         return form.errors, 401
@@ -38,7 +38,7 @@ def Update_gear(char_id):
         return {'Error': 'item not found'}, 404
 
 @gear_routes.route('/<int:char_id>', methods=['DELETE'])
-def get_gear_char(char_id):
+def delete_gear_char(char_id):
     user_id = current_user.to_dict()['id']
     char_info = Character_info.query.get(char_id)
     char = char_info.get_gear_id()

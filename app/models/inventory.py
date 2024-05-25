@@ -7,7 +7,7 @@ class Inventory (db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer(), primary_key=True)
-    inv = db.Column(db.String(), nullable=False)
+    inv = db.Column(db.String())
 
     char_info = db.relationship("Character_info", back_populates="inventory")
 
