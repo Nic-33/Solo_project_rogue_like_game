@@ -25,3 +25,6 @@ class Character_info (db.Model):
             'gear_id': self.gear_id,
             'stats': self.stats
         }
+
+    def get_gear_id(self):
+        return {'user_id': self.user_id , 'gear_id':self.gear_id}
