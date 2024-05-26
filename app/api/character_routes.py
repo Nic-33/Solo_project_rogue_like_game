@@ -47,3 +47,38 @@ def create_char():
         db.session.add(new_char)
         db.session.commit()
         return new_char.to_dict()
+
+@char_routes.route('/<int:char_id',methods=['PUT'])
+@login_required
+def update_char(char_id):
+    form = CharForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    user_id = current_user.to_dict()['id']
+    char_info = Char.query.get(char_id)
+    char = char_info.get_gear_inv()
+    if user_id == char['user_id']:
+        if form.validate_on_submit():
+            char_info.stats = form.stats.data
+            db.session.commit()
+            return char.to_dict()
+        print(form.errors)
+        return form.errors, 401
+    else:
+        return {'Error': 'item not found'}, 404
+
+@char_routes.route('/<int:char_id', methods=['DELETE'])
+@login_required
+def delete_char(char_id):
+    user_id = current_user.to_dict()['id']
+    char_info = Char.query.get(char_id)
+    char = char_info.get_gear_inv()
+    if user_id == char['user_id']:
+        gear = Gear.query.get(char['gear_id'])
+        inv = Inv.query.get(char['inv'])
+        db.session.delete(gear)
+        db.session.delete(inv)
+        db.session.delete(char_info)
+        db.session.commit()
+        return {'Delete': "successful"}, 200
+    else:
+        return {'Error': 'item not found'}, 404
