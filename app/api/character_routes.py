@@ -60,7 +60,7 @@ def update_char(char_id):
         if form.validate_on_submit():
             char_info.stats = form.stats.data
             db.session.commit()
-            return char.to_dict()
+            return char_info.to_dict()
         print(form.errors)
         return form.errors, 401
     else:

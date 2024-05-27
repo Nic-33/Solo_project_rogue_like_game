@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import User, db
+from app.models import User, Useable_item, User_info, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -56,7 +56,19 @@ def sign_up():
             email=form.data['email'],
             password=form.data['password']
         )
+        useable = Useable_item(
+            user_id = user.id,
+            usable_inv = ''
+        )
+        info = User_info(
+            user_id = user.id,
+            wins = 0,
+            lose = 0,
+            battle = 0
+        )
         db.session.add(user)
+        db.session.add(useable)
+        db.session.add(info)
         db.session.commit()
         login_user(user)
         return user.to_dict()
