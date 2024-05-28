@@ -6,9 +6,21 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import char_invReducer from "./character_inv";
+import charReducer from "./character";
+import gearReducer from "./gear";
+import runReducer from "./run";
+import use_invReducer from "./useable_inv";
+import user_infoReducer from "./user_info";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  session: charReducer,
+  session: char_invReducer,
+  session: gearReducer,
+  session: runReducer,
+  session: use_invReducer,
+  session: user_infoReducer
 });
 
 let enhancer;
