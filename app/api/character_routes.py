@@ -48,7 +48,7 @@ def create_char():
         db.session.commit()
         return new_char.to_dict()
 
-@char_routes.route('/<int:char_id',methods=['PUT'])
+@char_routes.route('/<int:char_id>',methods=['PUT'])
 @login_required
 def update_char(char_id):
     form = CharForm()
@@ -66,7 +66,7 @@ def update_char(char_id):
     else:
         return {'Error': 'item not found'}, 404
 
-@char_routes.route('/<int:char_id', methods=['DELETE'])
+@char_routes.route('/<int:char_id>', methods=['DELETE'])
 @login_required
 def delete_char(char_id):
     user_id = current_user.to_dict()['id']
