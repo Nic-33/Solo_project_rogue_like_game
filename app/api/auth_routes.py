@@ -42,7 +42,7 @@ def login():
         # user.last_login = datetime.today()
         # db.session.commit()
         login_user(user)
-        # print(user.to_dict())
+        print(user.to_dict())
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

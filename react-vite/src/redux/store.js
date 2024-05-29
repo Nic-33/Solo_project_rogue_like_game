@@ -15,12 +15,12 @@ import user_infoReducer from "./user_info";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  session: charReducer,
-  session: char_invReducer,
-  session: gearReducer,
-  session: runReducer,
-  session: use_invReducer,
-  session: user_infoReducer
+  character: charReducer,
+  char_inv: char_invReducer,
+  gear: gearReducer,
+  run: runReducer,
+  use_inv: use_invReducer,
+  user_info: user_infoReducer
 });
 
 let enhancer;

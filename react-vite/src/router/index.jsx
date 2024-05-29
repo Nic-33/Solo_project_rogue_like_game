@@ -24,8 +24,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'landing',
-        element: <LandingPage />
-      }
+        element: <LandingPage />,
+      },
     ],
   },
 ]);
