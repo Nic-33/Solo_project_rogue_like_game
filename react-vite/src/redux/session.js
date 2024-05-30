@@ -11,15 +11,14 @@ const removeUser = () => ({
 });
 
 export const thunkAuthenticate = () => async (dispatch) => {
-	const response = await fetch("/api/auth/");
-	if (response.ok) {
-		const data = await response.json();
-		if (data.errors) {
-			return;
-		}
-
-		dispatch(setUser(data));
-	}
+  const response = await fetch("/api/auth/");
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+    dispatch(setUser(data));
+  }
 };
 
 export const thunkLogin = (credentials) => async dispatch => {
@@ -28,9 +27,11 @@ export const thunkLogin = (credentials) => async dispatch => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials)
   });
-
-  if(response.ok) {
+  console.log('post response thunklogin')
+  if (response.ok) {
+    console.log('response ok')
     const data = await response.json();
+    console.log('data!!!!!!:', data)
     dispatch(setUser(data));
   } else if (response.status < 500) {
     const errorMessages = await response.json();
@@ -40,6 +41,7 @@ export const thunkLogin = (credentials) => async dispatch => {
   }
 };
 
+
 export const thunkSignup = (user) => async (dispatch) => {
   const response = await fetch("/api/auth/signup", {
     method: "POST",
@@ -47,7 +49,7 @@ export const thunkSignup = (user) => async (dispatch) => {
     body: JSON.stringify(user)
   });
 
-  if(response.ok) {
+  if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data));
   } else if (response.status < 500) {

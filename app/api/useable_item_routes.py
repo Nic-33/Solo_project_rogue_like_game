@@ -8,8 +8,8 @@ usable_routes = Blueprint('use_inv', __name__)
 @usable_routes.route('/', methods=['GET'])
 def get_users_inv():
     user_id = current_user.to_dict()['id']
-    useables = Useable_item.query.filter(Useable_item.user_id==user_id).all()
-    return {'useable_Items': [item.to_dict() for item in useables]}
+    useables = Useable_item.query.get(user_id)
+    return useables.to_dict()
 
 @usable_routes.route('/', methods=['PUT'])
 def update_useable_inv():

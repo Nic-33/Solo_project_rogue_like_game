@@ -19,5 +19,5 @@ class Useable_item (db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'use_item_id': self.useable_inv,
+            'use_item': self.useable_inv,
         }

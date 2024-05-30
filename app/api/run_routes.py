@@ -11,7 +11,7 @@ def get_all_user_runs():
     user_id = current_user.to_dict()['id']
     runs = Run.query.filter(Run.user_id==user_id).all()
     # print({'runs': [run.to_dict() for run in runs]})
-    return {'runs': [run.to_dict() for run in runs]}
+    return {'run': [run.to_dict() for run in runs]}
 
 @run_routes.route('/<int:run_id>', methods=['GET'])
 @login_required

@@ -5,11 +5,11 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_useable_item():
     useable_item1 = Useable_item(
-        user_id=1, useable_inv='test Seed info 1')
+        user_id=1, useable_inv='{"potion":3, "repel":2}')
     useable_item2 = Useable_item(
-        user_id=2, useable_inv='test Seed info 2')
+        user_id=2, useable_inv='{"Potion":4}')
     useable_item3 = Useable_item(
-        user_id=3, useable_inv='test Seed info 3')
+        user_id=3, useable_inv='{}')
 
     db.session.add(useable_item1)
     db.session.add(useable_item2)

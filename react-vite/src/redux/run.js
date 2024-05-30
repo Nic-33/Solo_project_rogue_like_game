@@ -102,7 +102,7 @@ function runReducer(state = initialState, action) {
             return { ...obj }
 
         case GET_A_RUN:
-            return{ ...action.payload}
+            return { ...action.payload }
 
         case UPDATE_RUN: {
             return {

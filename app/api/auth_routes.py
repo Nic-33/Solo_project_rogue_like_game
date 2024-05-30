@@ -6,6 +6,16 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 auth_routes = Blueprint('auth', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            if (error not in errorMessages):
+                errorMessages.append(f'{error}')
+    return errorMessages
 
 @auth_routes.route('/')
 def authenticate():
@@ -29,9 +39,13 @@ def login():
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
+        # user.last_login = datetime.today()
+        # db.session.commit()
         login_user(user)
+        print(user.to_dict())
         return user.to_dict()
-    return form.errors, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 
 @auth_routes.route('/logout')

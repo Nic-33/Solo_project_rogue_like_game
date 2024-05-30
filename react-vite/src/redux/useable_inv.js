@@ -24,6 +24,9 @@ export const thunkGetUse_inv = () => async (dispatch) => {
             return;
         }
         console.log('No Errors!!!!!')
+        if (typeof data.use_item === 'string') {
+            data.use_item = JSON.parse(data.use_item)
+        }
         dispatch(getUse_inv(data));
     }
     console.log('Use_inv Data Not OK!!!')
