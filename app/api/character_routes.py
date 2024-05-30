@@ -10,7 +10,7 @@ def get_all_user_char():
     user_id = current_user.to_dict()['id']
     chars = Char.query.filter(Char.user_id==user_id).all()
     # print({'runs': [run.to_dict() for run in runs]})
-    return {'Characters': [char.to_dict() for char in chars]}
+    return {'char': [char.to_dict() for char in chars]}
 
 @char_routes.route('/<int:char_id>', methods=['GET'])
 @login_required
@@ -28,7 +28,9 @@ def create_char():
     form = CharForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        new_inv = Inv()
+        new_inv = Inv(
+            inv = '{"head":[], "chest":[], "right":[], "left":[]}'
+        )
         new_gear = Gear(
             head = 0,
             chest = 0,

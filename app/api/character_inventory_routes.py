@@ -11,7 +11,7 @@ def get_inv_char(char_id):
     char_info = Character_info.query.get(char_id)
     char = char_info.get_gear_inv_id()
     if user_id == char['user_id']:
-        inv = Inv.query.get(char['inv_id'])
+        inv = Inv.query.get(char['inv'])
         return inv.to_dict()
     else:
         return {'Error': 'item not found'}, 404
@@ -25,7 +25,7 @@ def Update_inv(char_id):
     if user_id == char['user_id']:
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
-            inv = Inv.query.get(char['inv_id'])
+            inv = Inv.query.get(char['inv'])
             inv.head = form.head.data
             inv.chest = form.chest.data
             inv.right = form.right.data
@@ -43,7 +43,7 @@ def delete_inv_char(char_id):
     char_info = Character_info.query.get(char_id)
     char = char_info.get_gear_inv_id()
     if user_id == char['user_id']:
-        inv = Inv.query.get(char['inv_id'])
+        inv = Inv.query.get(char['inv'])
         db.session.delete(inv)
         db.session.commit()
         return {'Delete': "successful"}, 200

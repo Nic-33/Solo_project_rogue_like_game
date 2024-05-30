@@ -38,6 +38,15 @@ export const thunkGetChars = () => async (dispatch) => {
         if (data.errors) {
             return;
         }
+        for (const [key, value] of Object.entries(data.char)) {
+            // console.log(typeof value.stats)
+            if (typeof value.stats === 'string') {
+                // console.log('char1:', chars[key])
+                let stats = JSON.parse(value.stats);
+                value.stats = stats
+                // console.log('char2:', chars[key])
+            }
+        }
         console.log("data:", data)
         dispatch(getAllChar(data));
     }
@@ -51,6 +60,9 @@ export const thunkGetAChar = (char_id) => async (dispatch) => {
         const data = await response.json();
         if (data.errors) {
             return;
+        }
+        if (typeof data.stats === 'string') {
+            data.stats = JSON.parse(data.stats)
         }
         console.log("data:", data)
         dispatch(getAChar(data));
@@ -102,7 +114,7 @@ function charReducer(state = initialState, action) {
             return { ...obj }
 
         case GET_A_CHAR:
-            return{ ...action.payload}
+            return { ...action.payload }
 
         case UPDATE_CHAR: {
             return {

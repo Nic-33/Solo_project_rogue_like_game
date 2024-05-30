@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
+import ast
 class Character_info (db.Model):
     __tablename__ = 'character_info'
 

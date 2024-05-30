@@ -9,11 +9,11 @@ const MainPage = () => {
 
     const sessionUser = useSelector((state) => state.session.user);
 
-    // if (!sessionUser) return <Navigate to="/landing" replace={true} />;
+    if (!sessionUser) return <Navigate to="/landing" replace={true} />;
 
     return <div>
         <div className="Main_page_Container">
-            <div className="user_info_bar"><TestPage /></div>
+            <div className="testPage"><TestPage /></div>
 
         </div>
     </div>

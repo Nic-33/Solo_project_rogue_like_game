@@ -5,11 +5,11 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_inventory():
     inventory1 = Inventory(
-        inv='test Seed info 1')
+        inv='{"head":[], "chest":[1,3], "right":[], "left":[]}')
     inventory2 = Inventory(
-        inv='test Seed info 2')
+        inv='{"head":[2], "chest":[3,4], "right":[1,2], "left":[4]}')
     inventory3 = Inventory(
-        inv='test Seed info 3')
+        inv='{"head":[], "chest":[], "right":[], "left":[]}')
 
     db.session.add(inventory1)
     db.session.add(inventory2)

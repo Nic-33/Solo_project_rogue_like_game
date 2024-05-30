@@ -12,21 +12,24 @@ const updateChar_inv = (char_inv) => ({
 })
 
 
-export const thunkGetChar_inv = () => async (dispatch) => {
-    console.log('thunkGetChar_inv running')
-    const response = await fetch(`/api/inv`);
-    console.log('char_inv response:', response)
+export const thunkGetChar_inv = (char_id) => async (dispatch) => {
+    // console.log('thunkGetChar_inv running')
+    const response = await fetch(`/api/inv/${char_id}`);
+    // console.log('char_inv response:', response)
     if (response.ok) {
         const data = await response.json();
-        console.log('char_inv data:', data)
+        // console.log('char_inv data:', data)
         if (data.errors) {
-            console.log('Errors!!!!!!:', data.errors)
+            // console.log('Errors!!!!!!:', data.errors)
             return;
         }
-        console.log('No Errors!!!!!')
+        // console.log('No Errors!!!!!')
+        if (typeof data.inventory === 'string') {
+            data.inventory = JSON.parse(data.inventory)
+        }
         dispatch(getChar_inv(data));
     }
-    console.log('Char_inv Data Not OK!!!')
+    // console.log('Char_inv Data Not OK!!!')
 }
 
 export const thunkUpdateChar_inv = (payload) => async (dispatch) => {
