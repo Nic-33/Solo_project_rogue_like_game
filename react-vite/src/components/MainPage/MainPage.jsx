@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom";
-import TestPage from "../TestPage";
+import StartPage from "../StartPage";
 
 // import './MainPage.css'
 
@@ -13,7 +13,7 @@ const MainPage = () => {
 
     return <div>
         <div className="Main_page_Container">
-            <div className="testPage"><TestPage /></div>
+            <div className="startPage"><StartPage/></div>
 
         </div>
     </div>

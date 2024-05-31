@@ -3,6 +3,8 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import LandingPage from '../components/LandingPage';
 import MainPage from '../components/MainPage/MainPage';
+import ViewRuns from '../components/ViewRuns/ViewRuns';
+import RunPage from '../components/RunPage';
 
 import Layout from './Layout';
 
@@ -26,6 +28,14 @@ export const router = createBrowserRouter([
         path: 'landing',
         element: <LandingPage />,
       },
+      {
+        path: 'viewruns',
+        element: <ViewRuns />
+      },
+      {
+        path: 'run',
+        element: <RunPage />
+      }
     ],
   },
 ]);
