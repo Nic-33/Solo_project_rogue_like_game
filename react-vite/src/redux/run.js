@@ -52,6 +52,13 @@ export const thunkGetARun = (run_id) => async (dispatch) => {
         if (data.errors) {
             return;
         }
+        data.character_1 = JSON.parse(data.character_1)
+        if (data.character_2) {
+            data.character_2 = JSON.parse(data.character_2)
+        }
+        if (data.character_3) {
+            data.character_3 = JSON.parse(data.character_3)
+        }
         console.log("data:", data)
         dispatch(getARun(data));
     }

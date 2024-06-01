@@ -12,21 +12,21 @@ const updateGear = (gear) => ({
 })
 
 
-export const thunkGetGear = () => async (dispatch) => {
-    console.log('thunkGetGear running')
-    const response = await fetch(`/api/gear`);
-    console.log('gear response:', response)
+export const thunkGetGear = (char_id) => async (dispatch) => {
+    // console.log('thunkGetGear running')
+    const response = await fetch(`/api/gear/${char_id}`);
+    // console.log('gear response:', response)
     if (response.ok) {
         const data = await response.json();
-        console.log('gear data:', data)
+        // console.log('gear data:', data)
         if (data.errors) {
-            console.log('Errors!!!!!!:', data.errors)
+            // console.log('Errors!!!!!!:', data.errors)
             return;
         }
-        console.log('No Errors!!!!!')
+        // console.log('No Errors!!!!!')
         dispatch(getGear(data));
     }
-    console.log('Gear Data Not OK!!!')
+    // console.log('Gear Data Not OK!!!')
 }
 
 export const thunkUpdateGear = (payload) => async (dispatch) => {

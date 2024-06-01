@@ -28,7 +28,9 @@ def create_a_run():
         new_run = Run(
             user_id=current_user.to_dict()['id'],
             use_item_id=form.use_item_id.data,
-            character_id=form.character_id.data,
+            char_1=form.char_1.data,
+            char_2=form.char_2.data,
+            char_3=form.char_3.data,
             seed=form.seed.data
             )
         db.session.add(new_run)
@@ -45,6 +47,9 @@ def update_run(run_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         run.seed = form.seed.data
+        run.char_1=form.char_1.data
+        run.char_2=form.char_2.data
+        run.char_3=form.char_3.data
         db.session.commit()
         return run.to_dict()
     print(form.errors)

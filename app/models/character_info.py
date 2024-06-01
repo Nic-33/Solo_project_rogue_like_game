@@ -15,7 +15,6 @@ class Character_info (db.Model):
     users = db.relationship("User", back_populates="char_info")
     inventory = db.relationship("Inventory", back_populates="char_info")
     gear = db.relationship('Gear', back_populates='char_info')
-    runs = db.relationship('Run', back_populates='char_info')
 
     def to_dict(self):
         return {

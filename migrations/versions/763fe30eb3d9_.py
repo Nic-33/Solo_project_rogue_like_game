@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 99241d133d1a
-Revises: ffdc0a98111c
-Create Date: 2024-05-23 20:28:11.472597
+Revision ID: 763fe30eb3d9
+Revises: 
+Create Date: 2024-06-01 12:50:32.786875
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '99241d133d1a'
-down_revision = 'ffdc0a98111c'
+revision = '763fe30eb3d9'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -28,8 +28,17 @@ def upgrade():
     )
     op.create_table('inventory',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('inv', sa.String(), nullable=False),
+    sa.Column('inv', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('users',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('username', sa.String(length=40), nullable=False),
+    sa.Column('email', sa.String(length=255), nullable=False),
+    sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('username')
     )
     op.create_table('character_info',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -62,9 +71,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('use_item_id', sa.Integer(), nullable=False),
-    sa.Column('char_id', sa.Integer(), nullable=False),
+    sa.Column('char_1', sa.String(), nullable=False),
+    sa.Column('char_2', sa.String(), nullable=True),
+    sa.Column('char_3', sa.String(), nullable=True),
     sa.Column('seed', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['char_id'], ['character_info.id'], ),
     sa.ForeignKeyConstraint(['use_item_id'], ['useable_items.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -78,6 +88,7 @@ def downgrade():
     op.drop_table('user_info')
     op.drop_table('useable_items')
     op.drop_table('character_info')
+    op.drop_table('users')
     op.drop_table('inventory')
     op.drop_table('gear')
     # ### end Alembic commands ###

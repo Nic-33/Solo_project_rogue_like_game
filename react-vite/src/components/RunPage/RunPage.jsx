@@ -16,7 +16,7 @@ function RunPage() {
 
     const runSlice = useSelector((state) => state.run)
     const runs = Object.values(runSlice)
-    console.log('runSlice:', runSlice)
+    console.log('runSlice in runpage:', runSlice)
 
     const deleteRun = async (e) => {
         dispatch(thunkDeleteRun(run))
@@ -71,7 +71,7 @@ function RunPage() {
 
                 </div>
             </> : <>
-                <BattlePage props={{ run_id: run, char_id: char_id }} />
+                <BattlePage props={{ run_id: run, char_1: runSlice.character_1, char_2: runSlice.character_2, char_3: runSlice.character_3 }} />
             </>
             }
         </div >}

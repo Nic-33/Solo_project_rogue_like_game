@@ -8,7 +8,8 @@ import { thunkGetUse_inv } from "../../redux/useable_inv";
 import CharacterPanel from "../CharacterPanel/CharacterPanel";
 
 function BattlePage(props) {
-    const { run_id, char_id } = props.props
+    console.log('props on battlepage', props.props)
+    const { run_id, char_1, char_2, char_3 } = props.props
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -17,7 +18,15 @@ function BattlePage(props) {
 
     return <>
         <h1>battle page</h1>
-        <CharacterPanel props={{ char_id: char_id }} />
+        {char_1 &&
+            <CharacterPanel props={{ char: char_1 }} />
+        }
+        {char_2 &&
+            <CharacterPanel props={{ char: char_2 }} />
+        }
+        {char_3 &&
+            <CharacterPanel props={{ char: char_3 }} />
+        }
     </>
 }
 
