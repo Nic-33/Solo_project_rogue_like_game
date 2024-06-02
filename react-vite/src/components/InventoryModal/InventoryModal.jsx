@@ -4,47 +4,30 @@ import { thunkGetChar_inv, thunkUpdateChar_inv } from "../../redux/character_inv
 import { thunkGetGear, thunkUpdateGear } from "../../redux/gear";
 import { useModal } from "../../context/Modal";
 import "./InventoryModal.css";
+import { rightData, leftData, chestData, right_ability_data, left_ability_data } from "../../BTSCode/data";
 
 function InventoryModal(props) {
-    const { char_id, gear_id, inv_id } = props.props
-    const dispatch = useDispatch();
-    const char_invSlice = useSelector((state) => state.char_inv)
-    const gearSlice = useSelector((state) => state.gear)
-    const [loaded, setLoaded] = useState(false)
-    const [errors, setErrors] = useState({});
-    const { closeModal } = useModal();
-    console.log('char_inv:', char_invSlice)
-    console.log('gear:', gearSlice)
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const serverResponse = await dispatch(
-
-        );
-
-        if (serverResponse) {
-            setErrors(serverResponse);
-        } else {
-            closeModal();
-        }
-    };
-
-    useEffect(() => {
-        dispatch(thunkGetChar_inv(char_id))
-        dispatch(thunkGetGear(char_id))
-            .then(() => setLoaded(true))
-    }, [dispatch])
-
-    return (<>
-        {loaded && <>
-            <h1>Inventory</h1>
-            <form onSubmit={handleSubmit}>
-
-            </form>
-        </>}
+    console.log(props)
+    const invSlice = useSelector((state) => state.char_inv)
+    const inv = invSlice.inventory
+    let data
+    console.log(inv[props.tag])
+    if (props.tag === 'chest') {
+        data = chestData
+    } else if (props.tag === 'left') {
+        data = leftData
+    } else if (props.tag === 'right') {
+        data = rightData
+    } else if (props.tag === 'head') {
+        data = headData
+    }
+    return <>
+        <h1>{props.tag} menu</h1>
+        {inv[props.tag].map((item) => {
+            return <h2>{data[item].name}</h2>
+        })}
     </>
-    );
 }
 
-export default InventoryModal;
+export default InventoryModal

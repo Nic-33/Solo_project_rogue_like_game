@@ -15,6 +15,6 @@ class Inventory (db.Model):
 
     def to_dict(self):
         return {
-            'id': self.id,
+
             'inventory': self.inv
         }

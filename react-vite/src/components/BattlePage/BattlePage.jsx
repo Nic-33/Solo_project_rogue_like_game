@@ -9,7 +9,11 @@ import CharacterPanel from "../CharacterPanel/CharacterPanel";
 
 function BattlePage(props) {
     console.log('props on battlepage', props.props)
-    const { run_id, char_1, char_2, char_3 } = props.props
+    const { run_id } = props.props
+    const [char_1, setChar_1] = useState(props.props.char_1)
+    const [char_2, setChar_2] = useState(props.props.char_2)
+    const [char_3, setChar_3] = useState(props.props.char_3)
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -19,13 +23,13 @@ function BattlePage(props) {
     return <>
         <h1>battle page</h1>
         {char_1 &&
-            <CharacterPanel props={{ char: char_1 }} />
+            <CharacterPanel state={char_1} setState={setChar_1} />
         }
         {char_2 &&
-            <CharacterPanel props={{ char: char_2 }} />
+            <CharacterPanel state={char_2} setState={setChar_2} />
         }
         {char_3 &&
-            <CharacterPanel props={{ char: char_3 }} />
+            <CharacterPanel state={char_3} setState={setChar_3} />
         }
     </>
 }
