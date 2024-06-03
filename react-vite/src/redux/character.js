@@ -47,7 +47,7 @@ export const thunkGetChars = () => async (dispatch) => {
                 // console.log('char2:', chars[key])
             }
         }
-        console.log("data:", data)
+        // console.log("data:", data)
         dispatch(getAllChar(data));
     }
 }

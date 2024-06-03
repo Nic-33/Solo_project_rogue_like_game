@@ -1,17 +1,27 @@
 import { useSelector } from "react-redux"
 import { NavLink, Navigate } from "react-router-dom";
 import ViewRuns from "../ViewRuns/ViewRuns";
-// import './MainPage.css'
+import NewRunModal from "../NewRunModal/NewRunModal";
+import OpenModalMenuItem from "./OpenModalMenuItem"
+import { useModal } from "../../context/Modal";
+
+
+// import './StartPage.css'
 
 
 const StartPage = () => {
+    const { closeModal } = useModal();
 
+    const closeMenu = () => setShowMenu(false);
 
     return <div>
         <div className="Main_page_Container">
-            <NavLink to={'stuff'}>New Run</NavLink>
-            <NavLink to={'/run'}>Continue Run</NavLink>
-
+            <OpenModalMenuItem
+                itemText="New Run"
+                onItemClick={closeMenu}
+                modalComponent={<NewRunModal />}
+            />
+            <NavLink to={'/run'}>Continue</NavLink>
         </div>
     </div>
 }

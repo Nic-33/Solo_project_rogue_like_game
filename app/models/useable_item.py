@@ -11,7 +11,6 @@ class Useable_item (db.Model):
     useable_inv = db.Column(db.String(), nullable=False)
 
     users = db.relationship("User", back_populates="useable_items")
-    runs = db.relationship("Run", back_populates='useable_items')
 
 
 

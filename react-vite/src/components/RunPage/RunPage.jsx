@@ -12,7 +12,6 @@ function RunPage() {
     const [loaded, setLoaded] = useState(false)
     const [runSelect, setRunSelect] = useState(false)
     const [run, setRun] = useState()
-    const [char_id, setChar_id] = useState()
 
     const runSlice = useSelector((state) => state.run)
     const runs = Object.values(runSlice)
@@ -53,7 +52,6 @@ function RunPage() {
                                     type="submit"
                                     onClick={() => {
                                         setRun(run.id)
-                                        setChar_id(run.character_id)
                                     }}
                                 >Continue</button >
                             </form>

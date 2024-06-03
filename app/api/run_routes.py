@@ -27,7 +27,6 @@ def create_a_run():
     if form.validate_on_submit():
         new_run = Run(
             user_id=current_user.to_dict()['id'],
-            use_item_id=form.use_item_id.data,
             char_1=form.char_1.data,
             char_2=form.char_2.data,
             char_3=form.char_3.data,
