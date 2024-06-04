@@ -82,8 +82,7 @@ export const thunkCreateRun = (payload) => async (dispatch) => {
 }
 
 export const thunkUpdateRun = (payload, run_id) => async (dispatch) => {
-    console.log(run_id)
-    const response = await fetch(`api/run/${run_id}`, {
+    const response = await fetch(`/api/run/${run_id}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'

@@ -42,7 +42,9 @@ def create_a_run():
 @login_required
 def update_run(run_id):
     run = Run.query.get(run_id)
+    print(run)
     form = RunForm()
+    print('TEST!!!!!!:',form.char_1.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         run.seed = form.seed.data
