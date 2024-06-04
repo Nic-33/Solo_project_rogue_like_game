@@ -11,7 +11,7 @@ class Run (db.Model):
     char_1 = db.Column(db.String,nullable=False)
     char_2 = db.Column(db.String())
     char_3 = db.Column(db.String())
-    seed = db.Column(db.Integer(), nullable=False)
+    seed = db.Column(db.String(), nullable=False)
 
     users = db.relationship("User", back_populates="runs")
 

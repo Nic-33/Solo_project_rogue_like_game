@@ -59,6 +59,7 @@ export const thunkGetARun = (run_id) => async (dispatch) => {
         if (data.character_3) {
             data.character_3 = JSON.parse(data.character_3)
         }
+        data.seed = JSON.parse(data.seed)
         console.log("data:", data)
         dispatch(getARun(data));
     }
@@ -75,6 +76,7 @@ export const thunkCreateRun = (payload) => async (dispatch) => {
     if (response.ok) {
         const run = await response.json()
         dispatch(createRun(run))
+        return run
     }
 
 }

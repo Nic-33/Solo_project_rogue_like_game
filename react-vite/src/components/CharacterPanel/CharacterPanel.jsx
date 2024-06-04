@@ -38,11 +38,15 @@ function CharacterPanel(props) {
             <div>character panel</div>
             <div>{stats.name}</div>
             <div>{curhp}/{stats.hp}</div>
-            <button>attack</button>
+            <OpenModalMenuItem
+                itemText="Attack"
+                onItemClick={closeMenu}
+                modalComponent={<TargetModal />}
+            />
             <OpenModalMenuItem
                 itemText="Abilities"
                 onItemClick={closeMenu}
-                modalComponent={<GearModal state_char={props.state} setState_char={props.setState} state_gear={gear} setState_gear={setGear} state_inv={inv} setState_inv={setInv} />}
+                modalComponent={<AbilityModal state_char={props.state} setState_char={props.setState} state_gear={gear} setState_gear={setGear} state_inv={inv} setState_inv={setInv} />}
             />
             <OpenModalMenuItem
                 itemText="Inventory"

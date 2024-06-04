@@ -7,6 +7,7 @@ import ViewRuns from '../components/ViewRuns/ViewRuns';
 import RunPage from '../components/RunPage';
 
 import Layout from './Layout';
+import DataPage from '../components/DataPage/DataPage';
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +36,12 @@ export const router = createBrowserRouter([
       {
         path: 'run',
         element: <RunPage />
+      },
+      {
+        path: '/data/:run_id',
+        element: <DataPage />
       }
+
     ],
   },
 ]);

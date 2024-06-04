@@ -4,14 +4,33 @@ import { useModal } from "../../context/Modal";
 import "./NewRunModal.css";
 import { thunkGetChars } from "../../redux/character";
 import { thunkCreateRun } from "../../redux/run";
+import { useNavigate } from "react-router-dom";
 
+
+function getRandomIntInclusive(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
+}
+function getRandomSeed() {
+    let seedArray = [
+        getRandomIntInclusive(0, 1),
+        getRandomIntInclusive(0, 3),
+        getRandomIntInclusive(1, 4),
+        getRandomIntInclusive(2, 4),
+        getRandomIntInclusive(3, 5),
+        6
+    ]
+    return seedArray
+}
 
 function NewRunModal() {
     const { closeModal } = useModal();
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const characterSlice = useSelector((state) => state.character)
     const chars = Object.values(characterSlice)
-    console.log('Chars:', chars)
+    // console.log('Chars:', chars)
     const [errors, setErrors] = useState({});
     const [loaded, setLoaded] = useState(false)
     const [char_1, setChar_1] = useState("")
@@ -21,26 +40,25 @@ function NewRunModal() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let seed = "test Seed from form"
+        let seed = getRandomSeed()
+        seed = JSON.stringify(seed)
+        console.log('seed:', seed)
         const data = {
             char_1,
             char_2,
             char_3,
             seed
         }
-        console.log(data)
-        console.log('char1:', char_1)
-        console.log('char2:', char_2)
-        console.log('char3:', char_3)
+        // console.log(data)
+        // console.log('char1:', char_1)
+        // console.log('char2:', char_2)
+        // console.log('char3:', char_3)
         const serverResponse = await dispatch(
             thunkCreateRun(data)
         );
-
-        if (serverResponse) {
-            setErrors(serverResponse);
-        } else {
-            closeModal();
-        }
+        // console.log(serverResponse)
+        navigate(`/data/${serverResponse.id}`)
+        closeModal()
     };
 
     useEffect(() => {

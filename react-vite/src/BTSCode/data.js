@@ -47,9 +47,9 @@ export const chestData = {
 }
 
 export const enemyData = {
-    1: { name: "goblin", hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] },
-    2: { name: "slime", hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: [] },
-    3: { name: "boblin King", hp: 20, patk: 5, matk: 4, pdef: 7, mdef: 2, abi: [] },
+    1: { name: "goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] },
+    2: { name: "slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: [] },
+    3: { name: "boblin King", curhp: 20, hp: 20, patk: 5, matk: 4, pdef: 7, mdef: 2, abi: [] },
     4: { name: "magic weave robe", hp: 0, patk: 0, matk: 0, pdef: 1, mdef: 7, abi: [] },
     5: { name: "basic robe", hp: 0, patk: 0, matk: 0, pdef: 1, mdef: 5, abi: [] },
     6: { name: "Wood Sword", hp: 0, patk: 0, matk: 0, pdef: 0, mdef: 0, abi: [] },
@@ -93,3 +93,14 @@ export const left_ability_data = {
     12: { name: "Wood Sword", hp: 0, patk: 0, matk: 0, pdef: 0, mdef: 0, abi: [] },
     13: { name: "Wood Sword", hp: 0, patk: 0, matk: 0, pdef: 0, mdef: 0, abi: [] },
 }
+
+export const floor_Data = [
+    { 0: { roomType: 'enemy', enemy: [enemyData[1]] }, 1: { roomType: 'enemy', enemy: [enemyData[2]] } },
+    { 0: { roomType: 'enemy', enemy: [enemyData[1]] }, 1: { roomType: 'enemy', enemy: [enemyData[2]] } },
+    { 0: { roomType: 'enemy', enemy: [enemyData[1]] }, 1: { roomType: 'enemy', enemy: [enemyData[2]] } },
+    { 0: { roomType: 'enemy', enemy: [enemyData[1]] }, 1: { roomType: 'enemy', enemy: [enemyData[2]] } },
+    { 0: { roomType: 'enemy', enemy: [enemyData[1]] }, 1: { roomType: 'enemy', enemy: [enemyData[2]] } },
+    { 0: { roomType: 'enemy', enemy: [enemyData[1]] }, 1: { roomType: 'enemy', enemy: [enemyData[2]] } },
+    { 0: { roomType: 'enemy', enemy: [enemyData[1]] }, 1: { roomType: 'enemy', enemy: [enemyData[2]] } },
+    { 0: { roomType: 'enemy', enemy: [enemyData[1]] }, 1: { roomType: 'enemy', enemy: [enemyData[2]] } },
+]

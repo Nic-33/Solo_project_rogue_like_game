@@ -9,25 +9,25 @@ def seed_run():
         char_1='{"char_id":1, "inv_id":1,"gear_id":1,"curhp":9, "stats":{"name":"Jon","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}}',
         char_2='{"char_id":2, "inv_id":2,"gear_id":2,"curhp":1, "stats":{"name":"Zander","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}}',
         char_3='{"char_id":3, "inv_id":3,"gear_id":3,"curhp":5, "stats":{"name":"Momo","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}}',
-        seed='test Seed info 1')
+        seed='[6]')
     run2 = Run(
         user_id=1,
         char_1='{"char_id":1,"inv_id":1,"gear_id":1,"curhp":3, "stats":{"name":"Jon","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}}',
         char_2='{"char_id":3,"inv_id":3,"gear_id":3,"curhp":0, "stats":{"name":"Momo","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}}',
         char_3='',
-        seed='test Seed info 1')
+        seed='[2,2,3,3,6]')
     run3 = Run(
         user_id=1,
         char_1='{"char_id":1,"inv_id":1,"gear_id":1,"curhp":4, "stats":{"name":"Jon","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}}',
         char_2='{"char_id":2,"inv_id":2,"gear_id":2,"curhp":5, "stats":{"name":"Zander","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}}',
         char_3='',
-        seed='test Seed info 1')
+        seed='[5,6]')
     run4 = Run(
         user_id=1,
         char_1='{"char_id":3,"inv_id":3,"gear_id":3,"curhp":10, "stats":{"name":"Momo","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}}',
         char_2='',
         char_3='',
-        seed='test Seed info 1')
+        seed='[3,4,6]')
     db.session.add(run1)
     db.session.add(run2)
     db.session.add(run3)
