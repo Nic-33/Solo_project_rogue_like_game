@@ -7,8 +7,9 @@ import { useModal } from '../../context/Modal';
 
 function MapModal(props) {
     const { mon_1, mon_2, mon_3, seedData } = props.state
-    const { setMon_1, setMon_2, setMon_3, setSeedData, setRoomClear } = props.setState
+    const { setMon_1, setMon_2, setMon_3, setMon_1_hp, setMon_2_hp, setMon_3_hp, setMonAlive1, setMonAlive2, setMonAlive3, setSeedData, setRoomClear, setHideMenuChar1 } = props.setState
     const floor = Object.values(floor_Data[seedData[0]])
+    console.log('seedData:', seedData)
     console.log('floor', floor)
     const { closeModal } = useModal();
 
@@ -17,17 +18,25 @@ function MapModal(props) {
         let enemies = e
         if (enemies[0]) {
             setMon_2(enemies[0])
+            setMon_2_hp(enemies[0].curhp)
+            setMonAlive2(true)
         }
         if (enemies[1]) {
             setMon_1(enemies[1])
+            setMon_1_hp(enemies[1].curhp)
+            setMonAlive1(true)
         }
         if (enemies[2]) {
             setMon_3(enemies[2])
+            setMon_3_hp(enemies[2].curhp)
+            setMonAlive3(true)
+
         }
         let SeedTransData = seedData.slice(1)
         setSeedData(SeedTransData)
         setRoomClear('hidden')
-        console.log('Emenies', enemies)
+        setHideMenuChar1('visible')
+        // console.log('Emenies', enemies)
         closeModal()
     }
 
