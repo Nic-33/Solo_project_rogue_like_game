@@ -12,9 +12,9 @@ import MapModal from "../MapModal/MapModal";
 import TargetModal from "../TargetModal";
 
 function BattlePage(props) {
-    const { char_1, char_2, char_3, seedData } = props.state
+    const { eventLog, char_1, char_2, char_3, seedData } = props.state
     const { id } = props.props
-    const { setChar_1, setChar_2, setChar_3, setSeedData } = props.setState
+    const { setEventLog, setChar_1, setChar_2, setChar_3, setSeedData } = props.setState
     let turn = []
     const [turnOrder, setTurnOrder] = useState('')
     const [charAlive1, setCharAlive1] = useState(false)
@@ -102,17 +102,125 @@ function BattlePage(props) {
     //     setMonLoaded(true)
     // }, [])
 
+    function monsterAttack() {
+        let targetAlive = false
+        let target_char
+        let char
+        let num
+        let current = nextTurn()
+        while (!targetAlive) {
+            num = Math.floor(Math.random() * 3) + 1
+            if (num === 1 && charAlive1) {
+                // console.log(char_1)
+                target_char = 'char_1'
+                char = char_1
+                targetAlive = true
+            }
+            if (num === 2 && charAlive2) {
+                // console.log(char_2)
+                target_char = 'char_2'
+                char = char_2
+                targetAlive = true
+            }
+            if (num === 3 && charAlive3) {
+                // console.log(char_3)
+                target_char = 'char_3'
+                char = char_3
+                targetAlive = true
+            }
+        }
+        let monster
+        if (current === 'mon_1') {
+            monster = mon_1
+        } else if (current === 'mon_2') {
+            monster = mon_2
+        } else if (current === "mon_3") {
+            monster = mon_3
+        }
+
+
+        console.log(`${monster.name} is attacking ${char.stats.name}`)
+        if (monster.name === 'Goblin') {
+            console.log('Goblin attacked')
+        }
+        if (monster.name === 'Slime') {
+            console.log('Slime attacked')
+        }
+
+        let event = eventLog
+        event.splice(1, 0, `${monster.name} attacked ${char.stats.name} doing ${'insert num monster'} damage`)
+        setEventLog(event)
+
+        if (target_char === 'char_1') {
+            if (char.stats.curhp <= 0) {
+                setCharAlive1(false)
+                event = eventLog
+                event.splice(1, 0, `${char.stats.name} died`)
+                setEventLog(event)
+            }
+            setChar_1(char)
+        } else if (target_char === 'char_2') {
+            if (char.stats.curhp <= 0) {
+                setCharAlive2(false)
+                event = eventLog
+                event.splice(1, 0, `${char.stats.name} died`)
+                setEventLog(event)
+            }
+            setChar_2(char)
+        } else if (target_char === 'char_3') {
+            if (char.stats.curhp <= 0) {
+                setCharAlive3(false)
+                event = eventLog
+                event.splice(1, 0, `${char.stats.name} died`)
+                setEventLog(event)
+            }
+            setChar_3(char)
+        }
+
+        if ((turnOrder[0] === 'mon_1' && monAlive1) || (turnOrder[0] === 'mon_2' && monAlive2) || (turnOrder[0] === "mon_3" && monAlive3)) {
+            battleOver()
+            monsterAttack()
+        } else if (turnOrder[0] === 'char_1' && charAlive1) {
+            setHideMenuChar1('visible')
+        } else if (turnOrder[0] === 'char_2' && charAlive2) {
+            setHideMenuChar2('visible')
+        } else if (turnOrder[0] === 'char_3' && charAlive3) {
+            setHideMenuChar3('visible')
+        }
+        battleOver()
+
+    }
+
     function nextTurn() {
         let turns = turnOrder
         console.log('before next turnOrder runs:', turns)
         let turnTrans = turns.shift()
+        if (turnTrans === 'char_1' && !charAlive1) {
+            turns.push(turnTrans)
+            turnTrans = turns.shift()
+        }
+        if (turnTrans === 'char_2' && !charAlive2) {
+            turns.push(turnTrans)
+            turnTrans = turns.shift()
+        }
+        if (turnTrans === 'char_3' && !charAlive3) {
+            turns.push(turnTrans)
+            turnTrans = turns.shift()
+        }
         if (turnTrans === 'mon_1' && !monAlive1) {
+            turns.push(turnTrans)
             turnTrans = turns.shift()
         }
         if (turnTrans === 'mon_2' && !monAlive2) {
+            turns.push(turnTrans)
             turnTrans = turns.shift()
         }
         if (turnTrans === 'mon_3' && !monAlive3) {
+            turns.push(turnTrans)
+            turnTrans = turns.shift()
+        }
+        if (turnTrans === 'char_1' && !charAlive1) {
+            turns.push(turnTrans)
             turnTrans = turns.shift()
         }
         turns.push(turnTrans)
@@ -147,27 +255,44 @@ function BattlePage(props) {
         let damage = char.stats.patk
 
         console.log('damage:', damage)
-        mon.curhp = mon.curhp - 10
+        mon.curhp = mon.curhp - 1
         console.log("current hp:", mon.curhp)
+
+        let event = eventLog
+        event.splice(1, 0, `${char.stats.name} attacked ${mon.name} doing ${'inset num character'} damage`)
+        setEventLog(event)
+
         if (mon.curhp <= 0) {
             console.log("Monster is dead!!!")
             if (target_mon === 'mon_1') {
                 console.log('mon_1')
                 setMonAlive1(false)
+                event = eventLog
+                event.splice(1, 0, `${mon.name} died`)
+                setEventLog(event)
             } else if (target_mon === 'mon_2') {
                 console.log('mon_2')
+                event = eventLog
+                event.splice(1, 0, `${mon.name} died`)
+                setEventLog(event)
                 setMonAlive2(false)
             } else if (target_mon === 'mon_3') {
                 console.log('mon_3')
+                event = eventLog
+                event.splice(1, 0, `${mon.name} died`)
+                setEventLog(event)
                 setMonAlive3(false)
             }
         }
         let current = nextTurn()
-        console.log('next:', current)
+        console.log('current:', current)
         if (target_mon === 'mon_1') {
-            console.log('mon1', mon)
+            // console.log('mon1', mon)
             setMon_1(mon)
-            if (current === 'char_1') {
+            if (turnOrder[0] === 'mon_1' || turnOrder[0] === 'mon_2' || turnOrder[0] === "mon_3") {
+                console.log('Monster Attacks')
+                monsterAttack()
+            } else if (current === 'char_1') {
                 if (charAlive2) {
                     setHideMenuChar2('visible')
                 } else if (charAlive3) {
@@ -181,7 +306,7 @@ function BattlePage(props) {
                 } else if (charAlive1) {
                     setHideMenuChar1('visible')
                 } else {
-                    setCharAlive2('visible')
+                    setHideMenuChar2('visible')
                 }
             } else if (current === 'char_3') {
                 if (charAlive1) {
@@ -189,15 +314,18 @@ function BattlePage(props) {
                 } else if (charAlive2) {
                     setHideMenuChar2('visible')
                 } else {
-                    setCharAlive3('visible')
+                    setHideMenuChar3('visible')
                 }
             }
         } else if (target_mon === 'mon_2') {
-            console.log('mon2', mon)
+            // console.log('mon2', mon)
             setMon_2(mon)
-            if (current === 'char_1') {
+            if (turnOrder[0] === 'mon_1' || turnOrder[0] === 'mon_2' || turnOrder[0] === "mon_3") {
+                console.log('Monster Attacks')
+                monsterAttack()
+            } else if (current === 'char_1') {
                 if (charAlive2) {
-                    setHideMenuChar2('visible')
+                    v
                 } else if (charAlive3) {
                     setHideMenuChar3('visible')
                 } else {
@@ -209,7 +337,7 @@ function BattlePage(props) {
                 } else if (charAlive1) {
                     setHideMenuChar1('visible')
                 } else {
-                    setCharAlive2('visible')
+                    setHideMenuChar2('visible')
                 }
             } else if (current === 'char_3') {
                 if (charAlive1) {
@@ -217,13 +345,16 @@ function BattlePage(props) {
                 } else if (charAlive2) {
                     setHideMenuChar2('visible')
                 } else {
-                    setCharAlive3('visible')
+                    setHideMenuChar3('visible')
                 }
             }
         } else if (target_mon === 'mon_3') {
-            console.log('mon3', mon)
+            // console.log('mon3', mon)
             setMon_3(mon)
-            if (current === 'char_1') {
+            if (turnOrder[0] === 'mon_1' || turnOrder[0] === 'mon_2' || turnOrder[0] === "mon_3") {
+                console.log('Monster Attacks')
+                monsterAttack()
+            } else if (current === 'char_1') {
                 if (charAlive2) {
                     setHideMenuChar2('visible')
                 } else if (charAlive3) {
@@ -237,7 +368,7 @@ function BattlePage(props) {
                 } else if (charAlive1) {
                     setHideMenuChar1('visible')
                 } else {
-                    setCharAlive2('visible')
+                    setHideMenuChar2('visible')
                 }
             } else if (current === 'char_3') {
                 if (charAlive1) {
@@ -245,19 +376,18 @@ function BattlePage(props) {
                 } else if (charAlive2) {
                     setHideMenuChar2('visible')
                 } else {
-                    setCharAlive3('visible')
+                    setHideMenuChar3('visible')
                 }
             }
         }
-        console.log('hide targetmenu')
         battleOver()
     }
 
     function battleOver() {
-        console.log("battle over CAlled!!")
-        console.log('mon_1:', mon_1)
-        console.log('mon_2:', mon_2)
-        console.log('mon_3:', mon_3)
+        // console.log("battle over CAlled!!")
+        // console.log('mon_1:', mon_1)
+        // console.log('mon_2:', mon_2)
+        // console.log('mon_3:', mon_3)
         if ((!monAlive1 || mon_1.curhp <= 0) && (!monAlive2 || mon_2.curhp <= 0) && (!monAlive3 || mon_3.curhp <= 0)) {
             console.log('BAttle Over!!!')
             setTargetSelect1('hidden')
@@ -277,7 +407,7 @@ function BattlePage(props) {
                 char_3: char3,
                 seed
             }
-            console.log('char1:', data)
+            // console.log('char1:', data)
             dispatch(thunkUpdateRun(data, id))
 
         }
@@ -329,7 +459,10 @@ function BattlePage(props) {
         <div className="heroBattleArea">
             <div className="char_1">
                 {char_1 && <>
-                    <CharacterPanel state={char_1} />
+                    <div>character panel</div>
+                    <div>{char_1.stats.name}</div>
+                    <div>{char_1.curhp}/{char_1.stats.hp}</div>
+                    {/* <CharacterPanel state={char_1} /> */}
                     <div style={{ visibility: hideMenuChar1 }}>
                         <button onClick={() => (
                             attack('char1'),
@@ -341,7 +474,10 @@ function BattlePage(props) {
             </div>
             <div className="char_2">
                 {char_2 && <>
-                    <CharacterPanel state={char_2} />
+                    <div>character panel</div>
+                    <div>{char_2.stats.name}</div>
+                    <div>{char_2.curhp}/{char_2.stats.hp}</div>
+                    {/* <CharacterPanel state={char_2} /> */}
                     <div style={{ visibility: hideMenuChar2 }}>
                         <button onClick={() => (
                             attack('char2'),
@@ -353,7 +489,10 @@ function BattlePage(props) {
             </div>
             <div className="char_3">
                 {char_3 && <>
-                    <CharacterPanel state={char_3} />
+                    <div>character panel</div>
+                    <div>{char_3.stats.name}</div>
+                    <div>{char_3.curhp}/{char_3.stats.hp}</div>
+                    {/* <CharacterPanel state={char_3} /> */}
                     <div style={{ visibility: hideMenuChar3 }}>
                         <button onClick={() => (
                             attack('char3'),
@@ -363,7 +502,17 @@ function BattlePage(props) {
                 </>
                 }
             </div>
-        </div>
+            <div className="eventLog">
+                <h2>Event Log</h2>
+                {eventLog && <>
+                    {
+                        eventLog.map((key) => {
+                            return (<div>{key}</div>)
+                        })
+                    }
+                </>}
+            </div>
+        </div >
         <div className="nextFloorButton" style={{ visibility: roomClear }}>
             <OpenModalMenuItem
                 itemText="Next Floor"
@@ -388,9 +537,12 @@ function BattlePage(props) {
                         setCharAlive3,
                         setTurnOrder,
                         setFloorNumber,
+                        setEventLog,
                         setSeedData,
                         setRoomClear,
-                        setHideMenuChar1
+                        setHideMenuChar1,
+                        setHideMenuChar2,
+                        setHideMenuChar3
                     }} />}
             />
         </div>

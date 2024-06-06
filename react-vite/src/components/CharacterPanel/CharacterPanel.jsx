@@ -7,7 +7,7 @@ import TargetModal from "../TargetModal";
 
 
 function CharacterPanel(props) {
-    console.log("props character panel", props.state)
+    // console.log("props character panel", props.state)
     const setState = props.setState
     const { char_id, curhp, stats } = props.state
     const dispatch = useDispatch()
@@ -15,7 +15,7 @@ function CharacterPanel(props) {
     const [gear, setGear] = useState()
     const [inv, setInv] = useState()
 
-    console.log(stats)
+    // console.log(stats)
 
     useEffect(() => {
         const closeMenu = (e) => {

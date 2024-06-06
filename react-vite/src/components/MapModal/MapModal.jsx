@@ -3,14 +3,13 @@ import './MapModal.css'
 import { floor_Data } from "../../BTSCode/data";
 import { useModal } from '../../context/Modal';
 
-var difference = function (a, b) { return Math.abs(a - b); }
 
 function MapModal(props) {
     const { char_1, char_2, char_3, seedData } = props.state
-    const { setCharAlive1, setCharAlive2, setCharAlive3, setFloorNumber, setTurnOrder, setMon_1, setMon_2, setMon_3, setMonAlive1, setMonAlive2, setMonAlive3, setSeedData, setRoomClear, setHideMenuChar1 } = props.setState
+    const { setEventLog, setHideMenuChar2, setHideMenuChar3, setCharAlive1, setCharAlive2, setCharAlive3, setFloorNumber, setTurnOrder, setMon_1, setMon_2, setMon_3, setMonAlive1, setMonAlive2, setMonAlive3, setSeedData, setRoomClear, setHideMenuChar1 } = props.setState
     const floor = Object.values(floor_Data[seedData[0]])
-    console.log('seedData:', seedData.length)
-    console.log('floor', floor)
+    // console.log('seedData:', seedData.length)
+    // console.log('floor', floor)
     const { closeModal } = useModal();
 
     useEffect(() => {
@@ -20,6 +19,7 @@ function MapModal(props) {
         setMonAlive2(false)
         setMon_3()
         setMonAlive3(false)
+        setEventLog()
     }, [])
 
 
@@ -55,14 +55,13 @@ function MapModal(props) {
             turn.push('mon_3')
         }
         let SeedTransData = seedData.slice(1)
-        // console.log("turn after mon:", turn)
-        // let turnTrans = turn.shift()
-        // turn.push(turnTrans)
-        console.log("turn after mon:", turn)
+
         setTurnOrder(turn)
+        // console.log("turn after mon:", turn)
         setSeedData(SeedTransData)
         setRoomClear('hidden')
         setHideMenuChar1('visible')
+        setEventLog([`Welcome to floor ${6 - SeedTransData.length}`])
         setFloorNumber(6 - SeedTransData.length)
         // console.log('Emenies', enemies)
         closeModal()

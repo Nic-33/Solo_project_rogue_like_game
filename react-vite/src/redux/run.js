@@ -38,7 +38,7 @@ export const thunkGetRuns = () => async (dispatch) => {
         if (data.errors) {
             return;
         }
-        console.log("data:", data)
+        // console.log("data:", data)
         dispatch(getAllRun(data));
     }
 }
@@ -60,7 +60,7 @@ export const thunkGetARun = (run_id) => async (dispatch) => {
             data.character_3 = JSON.parse(data.character_3)
         }
         data.seed = JSON.parse(data.seed)
-        console.log("data:", data)
+        // console.log("data:", data)
         dispatch(getARun(data));
     }
 }
