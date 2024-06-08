@@ -44,7 +44,7 @@ def create_char():
             user_id=current_user.to_dict()['id'],
             inv_id = new_inv.id,
             gear_id = new_gear.id,
-            stats = ""
+            stats = form.stats.data
         )
         db.session.add(new_char)
         db.session.commit()

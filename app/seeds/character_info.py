@@ -5,11 +5,11 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_character_info():
     character_info1 = Character_info(
-        user_id=1, inv_id=1, gear_id=1, stats='{"name":"Jon","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}')
+        user_id=1, inv_id=1, gear_id=1, stats='{"name":"Jon","hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10, "agl":10}')
     character_info2 = Character_info(
-        user_id=1, inv_id=2, gear_id=2, stats='{"name":"Zander","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}')
+        user_id=1, inv_id=2, gear_id=2, stats='{"name":"Zander","hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10, "agl":10}')
     character_info3 = Character_info(
-        user_id=1, inv_id=3, gear_id=3, stats='{"name":"Momo","hp":10,"patk":1,"matk":1,"pdef":1,"mdef":1}')
+        user_id=1, inv_id=3, gear_id=3, stats='{"name":"Momo","hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10,"agl":10}')
 
     db.session.add(character_info1)
     db.session.add(character_info2)

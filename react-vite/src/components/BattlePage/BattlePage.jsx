@@ -1,15 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react"
-import { thunkGetAChar } from "../../redux/character";
 import { thunkDeleteRun, thunkGetARun, thunkGetRuns, thunkUpdateRun } from "../../redux/run";
-import { thunkGetChar_inv } from "../../redux/character_inv";
-import { thunkGetUse_inv } from "../../redux/useable_inv";
 import OpenModalMenuItem from "./OpenModalMenuItem"
-import CharacterPanel from "../CharacterPanel/CharacterPanel";
-import EnemyPanel from "../EnemyPanel/EnemyPanel";
 import MapModal from "../MapModal/MapModal";
-import TargetModal from "../TargetModal";
+import './BattlePage.css'
 
 function BattlePage(props) {
     const { eventLog, char_1, char_2, char_3, seedData } = props.state
@@ -460,6 +455,7 @@ function BattlePage(props) {
             <div className="char_1">
                 {char_1 && <>
                     <div>character panel</div>
+                    {char_1.stats.avatarUrl && <img className="avatar" src={char_1.stats.avatarUrl} alt="avatar" />}
                     <div>{char_1.stats.name}</div>
                     <div>{char_1.curhp}/{char_1.stats.hp}</div>
                     {/* <CharacterPanel state={char_1} /> */}
@@ -475,6 +471,7 @@ function BattlePage(props) {
             <div className="char_2">
                 {char_2 && <>
                     <div>character panel</div>
+                    {char_2.stats.avatarUrl && <img className="avatar" src={char_2.stats.avatarUrl} alt='avatar' />}
                     <div>{char_2.stats.name}</div>
                     <div>{char_2.curhp}/{char_2.stats.hp}</div>
                     {/* <CharacterPanel state={char_2} /> */}
@@ -490,6 +487,7 @@ function BattlePage(props) {
             <div className="char_3">
                 {char_3 && <>
                     <div>character panel</div>
+                    {char_3.stats.avatarUrl && <img className="avater" src={char_3.stats.avatarUrl} atl='avatar' />}
                     <div>{char_3.stats.name}</div>
                     <div>{char_3.curhp}/{char_3.stats.hp}</div>
                     {/* <CharacterPanel state={char_3} /> */}

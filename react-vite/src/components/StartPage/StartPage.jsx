@@ -4,6 +4,7 @@ import ViewRuns from "../ViewRuns/ViewRuns";
 import NewRunModal from "../NewRunModal/NewRunModal";
 import OpenModalMenuItem from "./OpenModalMenuItem"
 import { useModal } from "../../context/Modal";
+import CharacterCreationModal from "../CharacterCreationModal/CharacterCreationModal";
 
 
 // import './StartPage.css'
@@ -16,6 +17,11 @@ const StartPage = () => {
 
     return <div>
         <div className="Main_page_Container">
+            <OpenModalMenuItem
+                itemText="Create A New Character"
+                onItemClick={closeMenu}
+                modalComponent={<CharacterCreationModal />}
+            />
             <OpenModalMenuItem
                 itemText="New Run"
                 onItemClick={closeMenu}
