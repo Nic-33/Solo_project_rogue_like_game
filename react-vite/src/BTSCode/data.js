@@ -99,13 +99,13 @@ export const floor_Data = [
     {
         0: {
             roomType: 'enemy', enemy: [
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] },
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] }
+                { name: "Goblin", curhp: 10, hp: 10, patk: 13, matk: 10, pdef: 9, mdef: 9, abi: {'Strike':0} },
+                { name: "Goblin", curhp: 10, hp: 10, patk: 13, matk: 10, pdef: 9, mdef: 9, abi: {'Strike':0} },
             ]
         },
         1: {
             roomType: 'enemy', enemy: [
-                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: [] }
+                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: {} }
             ]
         }
     },
@@ -113,13 +113,13 @@ export const floor_Data = [
     {
         0: {
             roomType: 'enemy', enemy: [
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] },
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] }
+                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: {} },
+                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: {} }
             ]
         },
         1: {
             roomType: 'enemy', enemy: [
-                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: [] }
+                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: {} }
             ]
         }
     },
@@ -127,13 +127,13 @@ export const floor_Data = [
     {
         0: {
             roomType: 'enemy', enemy: [
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] },
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] }
+                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: {} },
+                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: {} }
             ]
         },
         1: {
             roomType: 'enemy', enemy: [
-                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: [] }
+                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: {} }
             ]
         }
     },
@@ -141,13 +141,13 @@ export const floor_Data = [
     {
         0: {
             roomType: 'enemy', enemy: [
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] },
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] }
+                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: {} },
+                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: {} }
             ]
         },
         1: {
             roomType: 'enemy', enemy: [
-                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: [] }
+                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: {} }
             ]
         }
     },
@@ -155,13 +155,13 @@ export const floor_Data = [
     {
         0: {
             roomType: 'enemy', enemy: [
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] },
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] }
+                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: {} },
+                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: {} }
             ]
         },
         1: {
             roomType: 'enemy', enemy: [
-                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: [] }
+                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: {} }
             ]
         }
     },
@@ -169,13 +169,13 @@ export const floor_Data = [
     {
         0: {
             roomType: 'enemy', enemy: [
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] },
-                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: [] }
+                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: {} },
+                { name: "Goblin", curhp: 10, hp: 10, patk: 3, matk: 0, pdef: 1, mdef: 1, abi: {} }
             ]
         },
         1: {
             roomType: 'enemy', enemy: [
-                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: [] }
+                { name: "Slime", curhp: 14, hp: 14, patk: 0, matk: 2, pdef: 5, mdef: 100, abi: {} }
             ]
         }
     },

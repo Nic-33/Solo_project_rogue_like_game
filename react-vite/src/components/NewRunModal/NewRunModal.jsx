@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./NewRunModal.css";
-import { thunkGetChars } from "../../redux/character";
+import { thunkDeleteChar, thunkGetChars } from "../../redux/character";
 import { thunkCreateRun } from "../../redux/run";
 import { useNavigate } from "react-router-dom";
 
@@ -24,6 +24,8 @@ function getRandomSeed() {
     return seedArray
 }
 
+
+
 function NewRunModal() {
     const { closeModal } = useModal();
     const navigate = useNavigate()
@@ -32,21 +34,55 @@ function NewRunModal() {
     const chars = Object.values(characterSlice)
     // console.log('Chars:', chars)
     const [errors, setErrors] = useState({});
+    const [selChar, setSelChar] = useState('')
     const [loaded, setLoaded] = useState(false)
+    const [charDel, setCharDel] = useState('')
     const [char_1, setChar_1] = useState("")
     const [char_2, setChar_2] = useState('')
     const [char_3, setChar_3] = useState('')
 
+    const deleteCharacter = async (e) => {
+        e.preventDefault();
+        await dispatch(thunkDeleteChar(charDel))
+        setCharDel('')
+    }
+
+    const selectCharacter = async (e) => {
+        e.preventDefault()
+        console.log(selChar)
+        let char = { char_id: selChar.id, inv_id: selChar.inventory_id, gear_id: selChar.gear_id, curhp: selChar.stats.hp, stats: selChar.stats }
+        if (!char_1) {
+            setChar_1(char)
+            setSelChar('')
+        } else if (!char_2) {
+            setChar_2(char)
+            setSelChar('')
+        } else if (!char_3) {
+            setChar_3(char)
+            setSelChar('')
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const char = []
         let seed = getRandomSeed()
         seed = JSON.stringify(seed)
-        console.log('seed:', seed)
+        // console.log('seed:', seed)
+        if (char_1) {
+            char.push(JSON.stringify(char_1))
+        }
+        if (char_2) {
+            char.push(JSON.stringify(char_2))
+        }
+        if (char_3) {
+            char.push(JSON.stringify(char_3))
+        }
+        // console.log('char:', char)
         const data = {
-            char_1,
-            char_2,
-            char_3,
+            char_1: char[0],
+            char_2: char[1],
+            char_3: char[2],
             seed
         }
         // console.log(data)
@@ -68,47 +104,51 @@ function NewRunModal() {
 
     return (<>
         {loaded && <div>
-            {!char_1 ? <>
-                <h1>character select</h1>
-                <h3>select up to 3 characters</h3>
-                <form className="characters" onSubmit={handleSubmit}>
-                    {chars.map((char) => {
-                        let stats = char.stats
-                        return (<div>
-                            <input type="checkbox" id={stats.name} value={JSON.stringify({ char_id: char.id, inv_id: char.inventory_id, gear_id: char.gear_id, curhp: char.stats.hp, stats: char.stats })} onChange={(e) => setChar_1(e.target.value)} />
-                            <label for={stats.name}>{stats.name}</label>
-                        </div>)
-                    })}
-                    <button onClick={(e) => handleSubmit(e)}>Start Run</button>
-                </form>
-            </> : !char_2 ? <>
-                <h1>character select</h1>
-                <h3>select up to 3 characters</h3>
-                <form className="characters" onSubmit={handleSubmit}>
-                    {chars.map((char) => {
-                        let stats = char.stats
-                        return (<div>
-                            <input type="checkbox" id={stats.name} value={JSON.stringify({ char_id: char.id, inv_id: char.inventory_id, gear_id: char.gear_id, curhp: char.stats.hp, stats: char.stats })} onChange={(e) => setChar_2(e.target.value)} />
-                            <label for={stats.name}>{stats.name}</label>
-                        </div>)
-                    })}
-                    <button onClick={(e) => handleSubmit(e)}>Start Run</button>
-                </form>
-            </> : <>
-                <h1>character select</h1>
-                <h3>select up to 3 characters</h3>
-                <form className="characters" onSubmit={handleSubmit}>
-                    {chars.map((char) => {
-                        let stats = char.stats
-                        return (<div>
-                            <input type="checkbox" id={stats.name} value={JSON.stringify({ char_id: char.id, inv_id: char.inventory_id, gear_id: char.gear_id, curhp: char.stats.hp, stats: char.stats })} onChange={(e) => setChar_3(e.target.value)} />
-                            <label for={stats.name}>{stats.name}</label>
-                        </div>)
-                    })}
-                    <button onClick={(e) => handleSubmit(e)}>Start Run</button>
-                </form>
-            </>
-            }
+            <h1>character select</h1>
+            <h3>select up to 3 characters</h3>
+            {chars.map((char) => {
+                let display = true
+                console.log(char)
+                let stats = char.stats
+                if (char.id === char_1.char_id || char.id === char_2.char_id || char.id === char_3.char_id) {
+                    display = false
+                }
+                return (<>
+                    {display && <div>
+                        <div>{stats.name}</div>
+                        {stats.avatarUrl && <img className="avatar" src={stats.avatarUrl} alt='avatar' />}
+                        <form onSubmit={selectCharacter}>
+                            <button type="submit" onClick={() => {
+                                setSelChar(char)
+                            }}>select</button>
+                        </form>
+                        <form onSubmit={deleteCharacter}>
+                            <button type="submit" onClick={() => {
+                                setCharDel(char.id)
+                            }}>delete character</button>
+                        </form>
+                    </div>}</>)
+            })}
+
+            <div className="Selected Characters">
+                <h3>Selected Characters</h3>
+                {char_1 && <>
+                    <div>{char_1.stats.name}</div>
+                    <button onClick={() => setChar_1('')}>Unselect</button>
+                </>}
+                {char_2 && <>
+                    <div>{char_2.stats.name}</div>
+                    <button onClick={() => setChar_2('')}>Unselect</button>
+
+                </>}
+                {char_3 && <>
+                    <div>{char_3.stats.name}</div>
+                    <button onClick={() => setChar_3('')}>Unselect</button>
+                </>}
+            </div>
+            <form className="startRun" onSubmit={handleSubmit}>
+                <button onClick={(e) => handleSubmit(e)}>Start Run</button>
+            </form>
         </div>}
     </>)
 

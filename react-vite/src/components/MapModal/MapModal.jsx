@@ -19,7 +19,7 @@ function MapModal(props) {
         setMonAlive2(false)
         setMon_3()
         setMonAlive3(false)
-        setEventLog()
+        // setEventLog()
     }, [])
 
 
@@ -61,6 +61,7 @@ function MapModal(props) {
         setSeedData(SeedTransData)
         setRoomClear('hidden')
         setHideMenuChar1('visible')
+        setEventLog()
         setEventLog([`Welcome to floor ${6 - SeedTransData.length}`])
         setFloorNumber(6 - SeedTransData.length)
         // console.log('Emenies', enemies)

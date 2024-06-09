@@ -5,6 +5,7 @@ import { thunkDeleteRun, thunkGetARun, thunkGetRuns, thunkUpdateRun } from "../.
 import OpenModalMenuItem from "./OpenModalMenuItem"
 import MapModal from "../MapModal/MapModal";
 import './BattlePage.css'
+import { thunkUpdateChar } from "../../redux/character";
 
 function BattlePage(props) {
     const { eventLog, char_1, char_2, char_3, seedData } = props.state
@@ -15,6 +16,8 @@ function BattlePage(props) {
     const [charAlive1, setCharAlive1] = useState(false)
     const [charAlive2, setCharAlive2] = useState(false)
     const [charAlive3, setCharAlive3] = useState(false)
+
+    const [lose, setLose] = useState(false)
     // console.log('battlepage mon_1:', seedData)
     // console.log('battlepage mon_2:', mon_2)
     // console.log('battlepage mon_3:', mon_3)
@@ -62,43 +65,9 @@ function BattlePage(props) {
     const dispatch = useDispatch()
     const closeMenu = () => setShowMenu(false);
 
-
-
-
-    // useEffect(() => {
-    //     if (mon_1) {
-    //         if (mon_1.hp < 1) {
-    //             setMon_1()
-    //         }
-    //         mon1hp = mon_1.hp
-    //     } else { setMon_1() }
-    //     if (mon_2) {
-    //         if (mon_2.hp < 1) {
-    //             setMon_2()
-    //         }
-    //         mon2hp = mon_2.hp
-    //     } else { setMon_2() }
-    //     if (mon_3) {
-    //         if (mon_3.hp < 1) {
-    //             setMon_3()
-    //         }
-    //         mon3hp = mon_3.hp
-
-    //     } else { setMon_3() }
-
-    //     if (!mon_1 && !mon_2 && !mon_3) {
-    //         setRoomClear('visible')
-    //     }
-
-
-    //     console.log('mon1:', mon_1)
-    //     console.log(mon_2)
-    //     console.log(mon_3)
-    //     setMonLoaded(true)
-    // }, [])
-
     function monsterAttack() {
         let targetAlive = false
+        let damage
         let target_char
         let char
         let num
@@ -134,16 +103,20 @@ function BattlePage(props) {
         }
 
 
-        console.log(`${monster.name} is attacking ${char.stats.name}`)
+        // console.log(`${monster.name} is attacking ${char.stats.name}`)
         if (monster.name === 'Goblin') {
             console.log('Goblin attacked')
+            damage = monster.patk - char.stats.pdef
         }
         if (monster.name === 'Slime') {
             console.log('Slime attacked')
         }
-
+        char.curhp = char.curhp - damage
+        if (target_char === 'char_1') setChar_1(char)
+        if (target_char === 'char_2') setChar_2(char)
+        if (target_char === 'char_3') setChar_3(char)
         let event = eventLog
-        event.splice(1, 0, `${monster.name} attacked ${char.stats.name} doing ${'insert num monster'} damage`)
+        event.splice(1, 0, `${monster.name} attacked ${char.stats.name} doing ${damage} damage`)
         setEventLog(event)
 
         if (target_char === 'char_1') {
@@ -247,14 +220,17 @@ function BattlePage(props) {
         // console.log('tar fun char:', char.stats.patk)
         // console.log('tar fun mon:', mon)
         // console.log('type:', atkType)
-        let damage = char.stats.patk
+        let damage = char.stats.patk - mon.pdef
+        if (damage < 0) {
+            damage = 0
+        }
 
-        console.log('damage:', damage)
-        mon.curhp = mon.curhp - 1
+        console.log('damage:', char.stats)
+        mon.curhp = mon.curhp - damage
         console.log("current hp:", mon.curhp)
 
         let event = eventLog
-        event.splice(1, 0, `${char.stats.name} attacked ${mon.name} doing ${'inset num character'} damage`)
+        event.splice(1, 0, `${char.stats.name} attacked ${mon.name} doing ${damage} damage`)
         setEventLog(event)
 
         if (mon.curhp <= 0) {
@@ -384,7 +360,7 @@ function BattlePage(props) {
         // console.log('mon_2:', mon_2)
         // console.log('mon_3:', mon_3)
         if ((!monAlive1 || mon_1.curhp <= 0) && (!monAlive2 || mon_2.curhp <= 0) && (!monAlive3 || mon_3.curhp <= 0)) {
-            console.log('BAttle Over!!!')
+            console.log('Battle Over!!!, Player wins')
             setTargetSelect1('hidden')
             setTargetSelect2('hidden')
             setTargetSelect3('hidden')
@@ -406,145 +382,161 @@ function BattlePage(props) {
             dispatch(thunkUpdateRun(data, id))
 
         }
+        if ((!charAlive1 || char_1.curhp <= 0) && (!charAlive2 || char_2.curhp <= 0) && (!charAlive3 || char_3.curhp <= 0)) {
+            console.log('Game Over')
+            setTargetSelect1('hidden')
+            setTargetSelect2('hidden')
+            setTargetSelect3('hidden')
+            setHideMenuChar1('hidden')
+            setHideMenuChar2('hidden')
+            setHideMenuChar3('hidden')
+            setRoomClear('visible')
+            dispatch(thunkDeleteRun(id))
+            setLose(true)
+        }
     }
 
-    return <>
-        <h1>battle page</h1>
-        {floorNumber && <h2>Floor Number {floorNumber}</h2>}
-        <div className="enemyBattleArea">
-            <div className="mon_1">
-                {mon_1 && monAlive1 && <>
-                    <div>monster panel 1</div>
-                    <div>{mon_1.name}</div>
-                    <div>{mon_1.curhp}/{mon_1.hp}</div>
-                    {/* <EnemyPanel state={mon_1} setState={setMon_1} /> */}
-                    <button style={{ visibility: targetSelect1 }} onClick={() => target(char_1, mon_1, type, 'mon_1')}>Target</button>
-                    <button style={{ visibility: targetSelect2 }} onClick={() => target(char_2, mon_1, type, 'mon_1')}>Target</button>
-                    <button style={{ visibility: targetSelect3 }} onClick={() => target(char_3, mon_1, type, 'mon_1')}>Target</button>
+    return (<>
+        {!lose ? <>
+            <h1>battle page</h1>
+            {floorNumber && <h2>Floor Number {floorNumber}</h2>}
+            <div className="enemyBattleArea">
+                <div className="mon_1">
+                    {mon_1 && monAlive1 && <>
+                        <div>monster panel 1</div>
+                        <div>{mon_1.name}</div>
+                        <div>{mon_1.curhp}/{mon_1.hp}</div>
+                        {/* <EnemyPanel state={mon_1} setState={setMon_1} /> */}
+                        <button style={{ visibility: targetSelect1 }} onClick={() => target(char_1, mon_1, type, 'mon_1')}>Target</button>
+                        <button style={{ visibility: targetSelect2 }} onClick={() => target(char_2, mon_1, type, 'mon_1')}>Target</button>
+                        <button style={{ visibility: targetSelect3 }} onClick={() => target(char_3, mon_1, type, 'mon_1')}>Target</button>
 
-                </>
-                }
-            </div>
-            <div className="mon_2">
-                {mon_2 && monAlive2 && <>
-                    <div>monster panel 2</div>
-                    <div>{mon_2.name}</div>
-                    <div>{mon_2.curhp}/{mon_2.hp}</div>
-                    {/* <EnemyPanel state={mon_2} setState={setMon_2} /> */}
-                    <button style={{ visibility: targetSelect1 }} onClick={() => target(char_1, mon_2, type, 'mon_2')}>Target</button>
-                    <button style={{ visibility: targetSelect2 }} onClick={() => target(char_2, mon_2, type, 'mon_2')}>Target</button>
-                    <button style={{ visibility: targetSelect3 }} onClick={() => target(char_3, mon_2, type, 'mon_2')}>Target</button>
-                </>
-                }
-            </div>
-            <div className="mon_3">
-                {mon_3 && monAlive3 && <>
-                    <div>monster panel 3</div>
-                    <div>{mon_3.name}</div>
-                    <div>{mon_3.curhp}/{mon_3.hp}</div>
-                    {/* <EnemyPanel state={mon_3} setState={setMon_3} /> */}
-                    <button style={{ visibility: targetSelect1 }} onClick={() => target(char_1, mon_3, type, 'mon_3')}>Target</button>
-                    <button style={{ visibility: targetSelect2 }} onClick={() => target(char_2, mon_3, type, 'mon_3')}>Target</button>
-                    <button style={{ visibility: targetSelect3 }} onClick={() => target(char_3, mon_3, type, 'mon_3')}>Target</button>
-                </>
-
-                }
-            </div>
-        </div>
-        <div className="heroBattleArea">
-            <div className="char_1">
-                {char_1 && <>
-                    <div>character panel</div>
-                    {char_1.stats.avatarUrl && <img className="avatar" src={char_1.stats.avatarUrl} alt="avatar" />}
-                    <div>{char_1.stats.name}</div>
-                    <div>{char_1.curhp}/{char_1.stats.hp}</div>
-                    {/* <CharacterPanel state={char_1} /> */}
-                    <div style={{ visibility: hideMenuChar1 }}>
-                        <button onClick={() => (
-                            attack('char1'),
-                            setType("patk")
-                        )}>Attack</button>
-                    </div>
-                </>
-                }
-            </div>
-            <div className="char_2">
-                {char_2 && <>
-                    <div>character panel</div>
-                    {char_2.stats.avatarUrl && <img className="avatar" src={char_2.stats.avatarUrl} alt='avatar' />}
-                    <div>{char_2.stats.name}</div>
-                    <div>{char_2.curhp}/{char_2.stats.hp}</div>
-                    {/* <CharacterPanel state={char_2} /> */}
-                    <div style={{ visibility: hideMenuChar2 }}>
-                        <button onClick={() => (
-                            attack('char2'),
-                            setType("patk")
-                        )}>Attack</button>
-                    </div>
-                </>
-                }
-            </div>
-            <div className="char_3">
-                {char_3 && <>
-                    <div>character panel</div>
-                    {char_3.stats.avatarUrl && <img className="avater" src={char_3.stats.avatarUrl} atl='avatar' />}
-                    <div>{char_3.stats.name}</div>
-                    <div>{char_3.curhp}/{char_3.stats.hp}</div>
-                    {/* <CharacterPanel state={char_3} /> */}
-                    <div style={{ visibility: hideMenuChar3 }}>
-                        <button onClick={() => (
-                            attack('char3'),
-                            setType("patk")
-                        )}>Attack</button>
-                    </div>
-                </>
-                }
-            </div>
-            <div className="eventLog">
-                <h2>Event Log</h2>
-                {eventLog && <>
-                    {
-                        eventLog.map((key) => {
-                            return (<div>{key}</div>)
-                        })
+                    </>
                     }
-                </>}
+                </div>
+                <div className="mon_2">
+                    {mon_2 && monAlive2 && <>
+                        <div>monster panel 2</div>
+                        <div>{mon_2.name}</div>
+                        <div>{mon_2.curhp}/{mon_2.hp}</div>
+                        {/* <EnemyPanel state={mon_2} setState={setMon_2} /> */}
+                        <button style={{ visibility: targetSelect1 }} onClick={() => target(char_1, mon_2, type, 'mon_2')}>Target</button>
+                        <button style={{ visibility: targetSelect2 }} onClick={() => target(char_2, mon_2, type, 'mon_2')}>Target</button>
+                        <button style={{ visibility: targetSelect3 }} onClick={() => target(char_3, mon_2, type, 'mon_2')}>Target</button>
+                    </>
+                    }
+                </div>
+                <div className="mon_3">
+                    {mon_3 && monAlive3 && <>
+                        <div>monster panel 3</div>
+                        <div>{mon_3.name}</div>
+                        <div>{mon_3.curhp}/{mon_3.hp}</div>
+                        {/* <EnemyPanel state={mon_3} setState={setMon_3} /> */}
+                        <button style={{ visibility: targetSelect1 }} onClick={() => target(char_1, mon_3, type, 'mon_3')}>Target</button>
+                        <button style={{ visibility: targetSelect2 }} onClick={() => target(char_2, mon_3, type, 'mon_3')}>Target</button>
+                        <button style={{ visibility: targetSelect3 }} onClick={() => target(char_3, mon_3, type, 'mon_3')}>Target</button>
+                    </>
+
+                    }
+                </div>
             </div>
-        </div >
-        <div className="nextFloorButton" style={{ visibility: roomClear }}>
-            <OpenModalMenuItem
-                itemText="Next Floor"
-                modalComponent={<MapModal
-                    state={{
-                        char_1,
-                        char_2,
-                        char_3,
-                        seedData,
-                        turnOrder,
-                        floorNumber
-                    }}
-                    setState={{
-                        setMon_1,
-                        setMon_2,
-                        setMon_3,
-                        setMonAlive1,
-                        setMonAlive2,
-                        setMonAlive3,
-                        setCharAlive1,
-                        setCharAlive2,
-                        setCharAlive3,
-                        setTurnOrder,
-                        setFloorNumber,
-                        setEventLog,
-                        setSeedData,
-                        setRoomClear,
-                        setHideMenuChar1,
-                        setHideMenuChar2,
-                        setHideMenuChar3
-                    }} />}
-            />
-        </div>
-    </>
+            <div className="heroBattleArea">
+                <div className="char_1">
+                    {char_1 && <>
+                        <div>character panel</div>
+                        {char_1.stats.avatarUrl && <img className="avatar" src={char_1.stats.avatarUrl} alt="avatar" />}
+                        <div>{char_1.stats.name}</div>
+                        <div>{char_1.curhp}/{char_1.stats.hp}</div>
+                        {/* <CharacterPanel state={char_1} /> */}
+                        <div style={{ visibility: hideMenuChar1 }}>
+                            <button onClick={() => (
+                                attack('char1'),
+                                setType("patk")
+                            )}>Attack</button>
+                        </div>
+                    </>
+                    }
+                </div>
+                <div className="char_2">
+                    {char_2 && <>
+                        <div>character panel</div>
+                        {char_2.stats.avatarUrl && <img className="avatar" src={char_2.stats.avatarUrl} alt='avatar' />}
+                        <div>{char_2.stats.name}</div>
+                        <div>{char_2.curhp}/{char_2.stats.hp}</div>
+                        {/* <CharacterPanel state={char_2} /> */}
+                        <div style={{ visibility: hideMenuChar2 }}>
+                            <button onClick={() => (
+                                attack('char2'),
+                                setType("patk")
+                            )}>Attack</button>
+                        </div>
+                    </>
+                    }
+                </div>
+                <div className="char_3">
+                    {char_3 && <>
+                        <div>character panel</div>
+                        {char_3.stats.avatarUrl && <img className="avater" src={char_3.stats.avatarUrl} atl='avatar' />}
+                        <div>{char_3.stats.name}</div>
+                        <div>{char_3.curhp}/{char_3.stats.hp}</div>
+                        {/* <CharacterPanel state={char_3} /> */}
+                        <div style={{ visibility: hideMenuChar3 }}>
+                            <button onClick={() => (
+                                attack('char3'),
+                                setType("patk")
+                            )}>Attack</button>
+                        </div>
+                    </>
+                    }
+                </div>
+                <div className="eventLog">
+                    <h2>Event Log</h2>
+                    {eventLog && <>
+                        {
+                            eventLog.map((key) => {
+                                return (<div>{key}</div>)
+                            })
+                        }
+                    </>}
+                </div>
+            </div >
+            <div className="nextFloorButton" style={{ visibility: roomClear }}>
+                <OpenModalMenuItem
+                    itemText="Next Floor"
+                    modalComponent={<MapModal
+                        state={{
+                            char_1,
+                            char_2,
+                            char_3,
+                            seedData,
+                            turnOrder,
+                            floorNumber
+                        }}
+                        setState={{
+                            setMon_1,
+                            setMon_2,
+                            setMon_3,
+                            setMonAlive1,
+                            setMonAlive2,
+                            setMonAlive3,
+                            setCharAlive1,
+                            setCharAlive2,
+                            setCharAlive3,
+                            setTurnOrder,
+                            setFloorNumber,
+                            setEventLog,
+                            setSeedData,
+                            setRoomClear,
+                            setHideMenuChar1,
+                            setHideMenuChar2,
+                            setHideMenuChar3
+                        }} />}
+                />
+            </div>
+        </> : <>
+
+        </>}
+    </>)
 }
 
 export default BattlePage

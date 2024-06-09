@@ -73,7 +73,7 @@ def update_char(char_id):
 def delete_char(char_id):
     user_id = current_user.to_dict()['id']
     char_info = Char.query.get(char_id)
-    char = char_info.get_gear_inv()
+    char = char_info.get_gear_inv_id()
     if user_id == char['user_id']:
         gear = Gear.query.get(char['gear_id'])
         inv = Inv.query.get(char['inv'])

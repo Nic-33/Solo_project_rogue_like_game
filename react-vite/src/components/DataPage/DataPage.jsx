@@ -12,7 +12,7 @@ function DataPage() {
     const run = runSlice.filter((info) => info.id == run_id).pop()
     // console.log('run:', run)
     const [loaded, setLoaded] = useState(false)
-    const [eventLog, setEventLog] = useState()
+    const [eventLog, setEventLog] = useState(['Welcome To the Dungeon!!'])
     const [char_1, setChar_1] = useState()
     const [char_2, setChar_2] = useState()
     const [char_3, setChar_3] = useState()
@@ -30,7 +30,7 @@ function DataPage() {
     return <>
         {loaded && <div>
             <div>data Page</div>
-            <BattlePage props={run} state={{eventLog, char_1, char_2, char_3, mon_1, mon_2, mon_3, seedData }} setState={{setEventLog, setChar_1, setChar_2, setChar_3, setMon_1, setMon_2, setMon_3, setSeedData }} />
+            <BattlePage props={run} state={{ eventLog, char_1, char_2, char_3, mon_1, mon_2, mon_3, seedData }} setState={{ setEventLog, setChar_1, setChar_2, setChar_3, setMon_1, setMon_2, setMon_3, setSeedData }} />
         </div>}
     </>
 }
