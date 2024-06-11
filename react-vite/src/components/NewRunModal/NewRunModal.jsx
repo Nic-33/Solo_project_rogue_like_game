@@ -5,6 +5,8 @@ import "./NewRunModal.css";
 import { thunkDeleteChar, thunkGetChars } from "../../redux/character";
 import { thunkCreateRun } from "../../redux/run";
 import { useNavigate } from "react-router-dom";
+import OpenModalMenuItem from './OpenModalMenuItem'
+import UpdateCharacterModal from "../UpdateCharacterModal/UpdateCharacterModal";
 
 
 function getRandomIntInclusive(min, max) {
@@ -12,6 +14,7 @@ function getRandomIntInclusive(min, max) {
     const maxFloored = Math.floor(max);
     return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
 }
+
 function getRandomSeed() {
     let seedArray = [
         getRandomIntInclusive(0, 1),
@@ -23,8 +26,6 @@ function getRandomSeed() {
     ]
     return seedArray
 }
-
-
 
 function NewRunModal() {
     const { closeModal } = useModal();
@@ -122,6 +123,9 @@ function NewRunModal() {
                                 setSelChar(char)
                             }}>select</button>
                         </form>
+                        <OpenModalMenuItem
+                            itemText="Edit"
+                            modalComponent={<UpdateCharacterModal props={char} />} />
                         <form onSubmit={deleteCharacter}>
                             <button type="submit" onClick={() => {
                                 setCharDel(char.id)
@@ -134,15 +138,18 @@ function NewRunModal() {
                 <h3>Selected Characters</h3>
                 {char_1 && <>
                     <div>{char_1.stats.name}</div>
+                    {char_1.stats.avatarUrl && <img className="avatar" src={char_1.stats.avatarUrl} alt='avatar' />}
                     <button onClick={() => setChar_1('')}>Unselect</button>
                 </>}
                 {char_2 && <>
                     <div>{char_2.stats.name}</div>
+                    {char_2.stats.avatarUrl && <img className="avatar" src={char_2.stats.avatarUrl} alt='avatar' />}
                     <button onClick={() => setChar_2('')}>Unselect</button>
 
                 </>}
                 {char_3 && <>
                     <div>{char_3.stats.name}</div>
+                    {char_3.stats.avatarUrl && <img className="avatar" src={char_3.stats.avatarUrl} alt='avatar' />}
                     <button onClick={() => setChar_3('')}>Unselect</button>
                 </>}
             </div>

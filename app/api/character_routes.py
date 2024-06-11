@@ -57,7 +57,7 @@ def update_char(char_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     user_id = current_user.to_dict()['id']
     char_info = Char.query.get(char_id)
-    char = char_info.get_gear_inv()
+    char = char_info.get_gear_inv_id()
     if user_id == char['user_id']:
         if form.validate_on_submit():
             char_info.stats = form.stats.data

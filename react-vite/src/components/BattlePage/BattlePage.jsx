@@ -296,7 +296,7 @@ function BattlePage(props) {
                 monsterAttack()
             } else if (current === 'char_1') {
                 if (charAlive2) {
-                    v
+                    setHideMenuChar2('visible')
                 } else if (charAlive3) {
                     setHideMenuChar3('visible')
                 } else {
@@ -534,6 +534,8 @@ function BattlePage(props) {
                 />
             </div>
         </> : <>
+            <h1>Failure state</h1>
+            <NavLink to={'/'}>Return Home</NavLink>
 
         </>}
     </>)

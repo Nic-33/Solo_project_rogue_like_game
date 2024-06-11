@@ -1,21 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { AvatarData } from "./AvatarData";
-import { thunkCreateChar } from "../../redux/character";
+import { thunkUpdateChar, thunkGetAChar } from "../../redux/character";
 
-function CharacterCreationModal() {
+function UpdateCharacterModal(props) {
+
+    const parseQueryValues = (route) => {
+        console.log('route in:', route)
+        const obj = {}
+        const eyeBrowsIndex = route.indexOf("eyebrows=")
+        const eyesIndex = route.indexOf("eyes=")
+        const mouthIndex = route.indexOf("mouth=")
+        const hairIndex = route.indexOf("hair=")
+        const hairColorIndex = route.indexOf("hairColor=")
+        const skinIndex = route.indexOf("skinColor=")
+        const eyeBrows = route.slice(eyeBrowsIndex + 9, (eyesIndex - 1))
+        const eyes = route.slice(eyesIndex + 5, (mouthIndex - 1))
+        const mouth = route.slice(mouthIndex + 6, (hairIndex - 1))
+        const hair = route.slice(hairIndex + 5, (hairColorIndex - 1))
+        const hairColor = route.slice(hairColorIndex + 10, (skinIndex - 1))
+        const skin = route.slice(skinIndex + 10)
+        obj["eyeBrows"] = eyeBrows
+        obj["eyes"] = eyes
+        obj["mouth"] = mouth
+        obj['hair'] = hair
+        obj['hairColor'] = hairColor
+        obj['skinColor'] = skin
+        console.log('route out:', obj)
+        return obj
+    }
+
+    console.log(props.props)
+    const { id, stats } = props.props
 
     const dispatch = useDispatch()
+    const char = useSelector((state) => state.char)
+    // console.log(char)
+    const avatarValues = parseQueryValues(stats.avatarUrl)
+    console.log(avatarValues)
     const [loaded, setLoaded] = useState(false)
-    const [name, setName] = useState()
-    const [eyes, setEyes] = useState(0)
-    const [mouth, setMouth] = useState(0)
-    const [eyeBrows, setEyeBrows] = useState(0)
-    const [hair, setHair] = useState(0)
-    const [hairColor, setHairColor] = useState(0)
-    const [skinColor, setSkinColor] = useState(0)
+    const [name, setName] = useState(stats.name)
+    const [eyes, setEyes] = useState(AvatarData.eyesIndex(AvatarData, avatarValues['eyes']))
+    const [mouth, setMouth] = useState(AvatarData.mouthIndex(AvatarData, avatarValues['mouth']))
+    const [eyeBrows, setEyeBrows] = useState(AvatarData.eyeBrowsIndex(AvatarData, avatarValues['eyeBrows']))
+    const [hair, setHair] = useState(AvatarData.hairIndex(AvatarData, avatarValues['hair']))
+    const [hairColor, setHairColor] = useState(AvatarData.hairColorIndex(AvatarData, avatarValues['hairColor']))
+    const [skinColor, setSkinColor] = useState(AvatarData.skinColorIndex(AvatarData, avatarValues['skinColor']))
 
     const { closeModal } = useModal();
     // console.table(avatar)
@@ -33,6 +65,10 @@ function CharacterCreationModal() {
         return route
     }
 
+    useEffect(() => {
+        dispatch(thunkGetAChar(id))
+            .then(() => setLoaded(true))
+    }, [dispatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -41,7 +77,7 @@ function CharacterCreationModal() {
         const CharacterData = {
             stats: `{"name":${JSON.stringify(name)},"hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10,"agl":10, "avatarUrl":${JSON.stringify(avatar_url)}}`
         }
-        await dispatch(thunkCreateChar(CharacterData))
+        await dispatch(thunkUpdateChar(CharacterData, id))
         closeModal()
     }
 
@@ -166,4 +202,4 @@ function CharacterCreationModal() {
     )
 }
 
-export default CharacterCreationModal
+export default UpdateCharacterModal
