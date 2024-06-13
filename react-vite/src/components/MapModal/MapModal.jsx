@@ -20,7 +20,7 @@ function MapModal(props) {
         setMon_3()
         setMonAlive3(false)
         // setEventLog()
-    }, [])
+    }, [setMon_1, setMon_2, setMon_3, setMonAlive1, setMonAlive2, setMonAlive3])
 
 
     const Enemy = (e) => {
@@ -68,6 +68,13 @@ function MapModal(props) {
         closeModal()
     }
 
+    const Shop = () => {
+
+    }
+
+    const Boss = () => {
+
+    }
 
     return <>
         <div id='map'>
@@ -76,11 +83,11 @@ function MapModal(props) {
                 {floor.map((room) => {
                     if (room.roomType === 'enemy') {
                         // console.log('room', room.enemy[0])
-                        return <button onClick={() => Enemy(room.enemy)}>{room.roomType}</button>
+                        return <button key={room.enemy.name} onClick={() => Enemy(room.enemy)}>{room.roomType}</button>
                     } else if (room.roomType === 'shop') {
-                        return <button onClick={() => Shop(room)}>{room.roomType}</button>
+                        return <button key={room.roomType} onClick={() => Shop(room)}>{room.roomType}</button>
                     } else if (room.roomType === 'boss') {
-                        return <button onClick={() => Boss(room)}>{room.roomType}</button>
+                        return <button key={room.roomType} onClick={() => Boss(room)}>{room.roomType}</button>
                     }
                 })}
             </form>

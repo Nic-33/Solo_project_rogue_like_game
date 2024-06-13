@@ -1,10 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react"
-import { thunkGetAChar } from "../../redux/character";
 import { thunkGetRuns } from "../../redux/run";
-import { thunkGetChar_inv } from "../../redux/character_inv";
-import { thunkGetUse_inv } from "../../redux/useable_inv";
+
 
 function ViewRuns() {
     const dispatch = useDispatch()
@@ -24,10 +22,10 @@ function ViewRuns() {
 
             {runs.map((run) => {
                 return (
-                <NavLink >
-                <p>{run.id}</p>
-                </NavLink>
-            )
+                    <NavLink >
+                        <p key={run.id}>{run.id}</p>
+                    </NavLink>
+                )
             })}
         </div>
         }

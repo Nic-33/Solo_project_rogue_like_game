@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react"
 import { thunkDeleteRun, thunkGetARun, thunkGetRuns } from "../../redux/run";
 import { useParams, useNavigate } from "react-router-dom";
-import DataPage from "../DataPage/DataPage";
 
 function RunPage() {
     const dispatch = useDispatch()
@@ -15,7 +14,7 @@ function RunPage() {
     const runs = Object.values(runSlice)
     // console.log('runSlice in runpage:', runSlice)
 
-    const deleteRun = async (e) => {
+    const deleteRun = async () => {
         dispatch(thunkDeleteRun(run))
         setRunSelect(false)
     }
@@ -35,7 +34,7 @@ function RunPage() {
             dispatch(thunkGetRuns())
                 .then(() => setLoaded(true))
         }
-    }, [dispatch])
+    }, [dispatch, run_id])
 
     return (<>
         {loaded && <div>

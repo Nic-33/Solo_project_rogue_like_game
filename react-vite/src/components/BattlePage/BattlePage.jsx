@@ -6,6 +6,12 @@ import OpenModalMenuItem from "./OpenModalMenuItem"
 import MapModal from "../MapModal/MapModal";
 import './BattlePageCharacter.css'
 
+function getRandomIntInclusive(min, max) {
+    const minCeiled = Math.ceil(min);
+    const maxFloored = Math.floor(max);
+    return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
+}
+
 function BattlePage(props) {
     const { eventLog, char_1, char_2, char_3, seedData } = props.state
     const { id } = props.props
@@ -17,7 +23,9 @@ function BattlePage(props) {
     const [charAlive3, setCharAlive3] = useState(false)
     const comingSoon = () => alert('Feature Coming Soon')
 
+    const [win, setWin] = useState(false)
     const [lose, setLose] = useState(false)
+
     // console.log('battlepage mon_1:', seedData)
     // console.log('battlepage mon_2:', mon_2)
     // console.log('battlepage mon_3:', mon_3)
@@ -63,7 +71,6 @@ function BattlePage(props) {
     const [type, setType] = useState()
 
     const dispatch = useDispatch()
-    const closeMenu = () => setShowMenu(false);
 
     function monsterAttack() {
         let targetAlive = false
@@ -106,10 +113,12 @@ function BattlePage(props) {
         // console.log(`${monster.name} is attacking ${char.stats.name}`)
         if (monster.name === 'Goblin') {
             console.log('Goblin attacked')
-            damage = monster.patk - char.stats.pdef
+            damage = monster.patk - char.stats.pdef + getRandomIntInclusive(1, 3)
         }
         if (monster.name === 'Slime') {
             console.log('Slime attacked')
+            damage = monster.patk - char.stats.pdef + getRandomIntInclusive(3, 5)
+
         }
         char.curhp = char.curhp - damage
         if (target_char === 'char_1') setChar_1(char)
@@ -220,7 +229,7 @@ function BattlePage(props) {
         // console.log('tar fun char:', char.stats.patk)
         // console.log('tar fun mon:', mon)
         // console.log('type:', atkType)
-        let damage = char.stats.patk - mon.pdef
+        let damage = char.stats.patk - mon.pdef + getRandomIntInclusive(1, 5)
         if (damage < 0) {
             damage = 0
         }
@@ -505,7 +514,7 @@ function BattlePage(props) {
                         <div className="char_3">
                             {char_3 && <>
                                 <div className="charInfo" id="char3Info">
-                                    {char_3.stats.avatarUrl && <div className="charAvatar" id='char3Avatar'><img className="avatar" src={char_3.stats.avatarUrl} atl='avatar' /></div>}
+                                    {char_3.stats.avatarUrl && <div className="charAvatar" id='char3Avatar'><img className="avatar" src={char_3.stats.avatarUrl} alt='avatar' /></div>}
                                     <div className="charName" id='char2Name' >{char_3.stats.name}</div>
                                     <div className="charHealth" id="char3Health">{char_3.curhp}/{char_3.stats.hp}</div>
                                 </div>
@@ -534,7 +543,7 @@ function BattlePage(props) {
                     {eventLog && <>
                         {
                             eventLog.map((key) => {
-                                return (<div className="eventLogInfo">{key}</div>)
+                                return (<div key={key} className="eventLogInfo">{key}</div>)
                             })
                         }
                     </>}

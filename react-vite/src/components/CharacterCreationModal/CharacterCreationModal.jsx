@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { AvatarData } from "./AvatarData";
 import { thunkCreateChar } from "../../redux/character";
@@ -8,7 +7,6 @@ import { thunkCreateChar } from "../../redux/character";
 function CharacterCreationModal() {
 
     const dispatch = useDispatch()
-    const [loaded, setLoaded] = useState(false)
     const [name, setName] = useState()
     const [eyes, setEyes] = useState(0)
     const [mouth, setMouth] = useState(0)

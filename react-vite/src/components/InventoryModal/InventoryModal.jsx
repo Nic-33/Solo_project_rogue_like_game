@@ -1,8 +1,4 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { thunkGetChar_inv, thunkUpdateChar_inv } from "../../redux/character_inv";
-import { thunkGetGear, thunkUpdateGear } from "../../redux/gear";
-import { useModal } from "../../context/Modal";
+import { useSelector } from "react-redux";
 import "./InventoryModal.css";
 import { rightData, leftData, chestData, right_ability_data, left_ability_data } from "../../BTSCode/data";
 

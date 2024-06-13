@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { AvatarData } from "./AvatarData";
-import { thunkUpdateChar, thunkGetAChar } from "../../redux/character";
+import { thunkUpdateChar } from "../../redux/character";
 
 function UpdateCharacterModal(props) {
 
@@ -36,11 +35,8 @@ function UpdateCharacterModal(props) {
     const { id, stats } = props.props
 
     const dispatch = useDispatch()
-    const char = useSelector((state) => state.char)
-    // console.log(char)
     const avatarValues = parseQueryValues(stats.avatarUrl)
     console.log(avatarValues)
-    const [loaded, setLoaded] = useState(false)
     const [name, setName] = useState(stats.name)
     const [eyes, setEyes] = useState(AvatarData.eyesIndex(AvatarData, avatarValues['eyes']))
     const [mouth, setMouth] = useState(AvatarData.mouthIndex(AvatarData, avatarValues['mouth']))
@@ -64,11 +60,6 @@ function UpdateCharacterModal(props) {
         console.log(route)
         return route
     }
-
-    useEffect(() => {
-        dispatch(thunkGetAChar(id))
-            .then(() => setLoaded(true))
-    }, [dispatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault()

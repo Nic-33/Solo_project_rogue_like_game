@@ -41,10 +41,8 @@ export const thunkGetChars = () => async (dispatch) => {
         for (const [key, value] of Object.entries(data.char)) {
             // console.log(typeof value.stats)
             if (typeof value.stats === 'string') {
-                // console.log('char1:', chars[key])
                 let stats = JSON.parse(value.stats);
                 value.stats = stats
-                // console.log('char2:', chars[key])
             }
         }
         // console.log("data:", data)
