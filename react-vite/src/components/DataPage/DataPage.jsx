@@ -29,7 +29,6 @@ function DataPage() {
 
     return <>
         {loaded && <div>
-            <div>data Page</div>
             <BattlePage props={run} state={{ eventLog, char_1, char_2, char_3, mon_1, mon_2, mon_3, seedData }} setState={{ setEventLog, setChar_1, setChar_2, setChar_3, setMon_1, setMon_2, setMon_3, setSeedData }} />
         </div>}
     </>
