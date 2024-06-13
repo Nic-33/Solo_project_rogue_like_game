@@ -68,7 +68,7 @@
     justify-content: center;
 }
 
-.enemyImage {}
+/* .enemyImage {} */
 
 .enemyHealth {
     display: flex;
@@ -132,7 +132,7 @@
     justify-content: center;
 }
 
-.hideMenu {}
+/* .hideMenu {} */
 
 .charAtkButton {
     width: 100%;
