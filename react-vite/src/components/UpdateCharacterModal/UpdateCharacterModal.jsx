@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { AvatarData } from "./AvatarData";
 import { thunkUpdateChar } from "../../redux/character";
+import './UpdateCharacterModel.css'
 
 function UpdateCharacterModal(props) {
 
@@ -154,41 +155,66 @@ function UpdateCharacterModal(props) {
     }
     return (
         <>
-            <div>
-                <img className="avatar"
-                    src={`https://api.dicebear.com/8.x/adventurer/svg?eyebrows=${AvatarData.eyeBrows[eyeBrows]}&eyes=${AvatarData.eyes[eyes]}&mouth=${AvatarData.mouth[mouth]}&hair=${AvatarData.hair[hair]}&haircolor=${AvatarData.hairColor[hairColor]}&skinColor=${AvatarData.skinColor[skinColor]}`}
-                    alt="avatar" />
-                <h2>Skin Color</h2>
-                <button onClick={() => selectSkinColor(-1)}>- </button>
-                <button onClick={() => selectSkinColor(1)}> +</button>
-                <h2>Eyes</h2>
-                <button onClick={() => selectEyes(-1)}>- </button>
-                <button onClick={() => selectEyes(1)}> +</button>
-                <h2>Mouth</h2>
-                <button onClick={() => selectMouth(-1)}>- </button>
-                <button onClick={() => selectMouth(1)}> +</button>
-                <h2>Hair</h2>
-                <button onClick={() => selectHair(-1)}>- </button>
-                <button onClick={() => selectHair(1)}> +</button>
-                <h2>Hair Color</h2>
-                <button onClick={() => selectHairColor(-1)}>- </button>
-                <button onClick={() => selectHairColor(1)}> +</button>
-                <h2>Eyebrows</h2>
-                <button onClick={() => selectEyebrows(-1)}>- </button>
-                <button onClick={() => selectEyebrows(1)}> +</button>
-                <h2>Character Name</h2>
-                <form className="create Character Form" onSubmit={handleSubmit}>
+            <div className="characterCreator">
+                <div className="avatarImage">
+                    <img className="avatar"
+                        src={`https://api.dicebear.com/8.x/adventurer/svg?eyebrows=${AvatarData.eyeBrows[eyeBrows]}&eyes=${AvatarData.eyes[eyes]}&mouth=${AvatarData.mouth[mouth]}&hair=${AvatarData.hair[hair]}&haircolor=${AvatarData.hairColor[hairColor]}&skinColor=${AvatarData.skinColor[skinColor]}`}
+                        alt="avatar" />
+                </div>
+                <div className="skinColor">
+                    <h2>Skin Color</h2>
+                    <div className="selectors">
+                        <button onClick={() => selectSkinColor(-1)}>- </button>
+                        <button onClick={() => selectSkinColor(1)}> +</button>
+                    </div>
+                </div>
+                <div className="eyes">
+                    <h2>Eyes</h2>
+                    <div className="selectors">
+                        <button onClick={() => selectEyes(-1)}>- </button>
+                        <button onClick={() => selectEyes(1)}> +</button>
+                    </div>
+                </div>
+                <div className="mouth">
+                    <h2>Mouth</h2>
+                    <div className="selectors">
+                        <button onClick={() => selectMouth(-1)}>- </button>
+                        <button onClick={() => selectMouth(1)}> +</button>
+                    </div>
+                </div>
+                <div className="hair">
+                    <h2>Hair</h2>
+                    <div className="selectors">
+                        <button onClick={() => selectHair(-1)}>- </button>
+                        <button onClick={() => selectHair(1)}> +</button>
+                    </div>
+                </div>
+                <div className="hairColor">
+                    <h2>Hair Color</h2>
+                    <div className="selectors">
+                        <button onClick={() => selectHairColor(-1)}>- </button>
+                        <button onClick={() => selectHairColor(1)}> +</button>
+                    </div>
+                </div>
+                <div className="eyeBrows">
+                    <h2>Eyebrows</h2>
+                    <div className="selectors">
+                        <button onClick={() => selectEyebrows(-1)}>- </button>
+                        <button onClick={() => selectEyebrows(1)}> +</button>
+                    </div>
+                </div>
+                <div className="name">
+                    <h2>Character Name</h2>
                     <input
                         type="text"
                         placeholder="Character Name"
                         value={name}
                         onChange={updateName} />
-                    <h2></h2>
-
-                    <h2>Save</h2>
+                </div>
+                <form className="save" onSubmit={handleSubmit}>
                     <button type="submit">save </button>
                 </form>
-            </div>
+            </div >
         </>
     )
 }

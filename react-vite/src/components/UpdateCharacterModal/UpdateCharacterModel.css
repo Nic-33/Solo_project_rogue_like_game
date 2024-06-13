@@ -1,0 +1,109 @@
+.characterCreator {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr 1fr 30px;
+    grid-template-areas:
+        'char stat1 stat2'
+        'char stat3 stat4'
+        'name stat5 stat6'
+        'save save save';
+    width: 600px;
+    height: 400px;
+    background-color: #a97c73;
+    border: 10px ridge #2d1e2f;
+}
+
+.characterCreator>.avatar {
+
+    width: 200px;
+    height: 200px;
+}
+
+.selectors {
+    display: flex;
+    align-items: flex-start;
+}
+
+.selectors>button {
+    width: 50px
+}
+
+.avatarImage {
+    grid-area: char;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #b0c592;
+    border: 10px ridge #2d1e2f;
+    width: 200px;
+    height: 200px;
+}
+
+.name {
+    grid-area: name;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.save {
+    grid-area: save;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.save>button {
+    width: 100px;
+    height: 20px;
+}
+
+.skinColor {
+    grid-area: stat1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hair {
+    grid-area: stat3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hairColor {
+    grid-area: stat5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.eyeBrows {
+    grid-area: stat2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.eyes {
+    grid-area: stat4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.mouth {
+    grid-area: stat6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
