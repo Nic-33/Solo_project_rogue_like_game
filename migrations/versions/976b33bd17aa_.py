@@ -60,7 +60,7 @@ def upgrade():
     sa.Column('char_1', sa.String(), nullable=False),
     sa.Column('char_2', sa.String(), nullable=True),
     sa.Column('char_3', sa.String(), nullable=True),
-    sa.Column('seed', sa.Integer(), nullable=False),
+    sa.Column('seed', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
