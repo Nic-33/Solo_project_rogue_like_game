@@ -71,20 +71,21 @@ def sign_up():
             password=form.data['password']
         )
         db.session.add(user)
+        db.session.commit()
         # print(user)
-        # useable = Useable_item(
-        #     user_id = user.id,
-        #     useable_inv = ''
-        # )
-        # info = User_info(
-        #     user_id = user.id,
-        #     wins = 0,
-        #     loss = 0,
-        #     battle = 0
-        # )
+        useable = Useable_item(
+            user_id = user.id,
+            useable_inv = ''
+        )
+        info = User_info(
+            user_id = user.id,
+            wins = 0,
+            loss = 0,
+            battle = 0
+        )
 
-        # db.session.add(useable)
-        # db.session.add(info)
+        db.session.add(useable)
+        db.session.add(info)
         db.session.commit()
         login_user(user)
         return user.to_dict()
