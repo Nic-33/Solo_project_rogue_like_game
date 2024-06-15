@@ -2,3 +2,12 @@
 body {
     margin: 0px;
 }
+
+button {
+    cursor: pointer;
+}
+
+.error {
+    background-color: white;
+    color: red
+}

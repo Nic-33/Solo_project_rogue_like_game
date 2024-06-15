@@ -45,6 +45,7 @@ function UpdateCharacterModal(props) {
     const [hair, setHair] = useState(AvatarData.hairIndex(AvatarData, avatarValues['hair']))
     const [hairColor, setHairColor] = useState(AvatarData.hairColorIndex(AvatarData, avatarValues['hairColor']))
     const [skinColor, setSkinColor] = useState(AvatarData.skinColorIndex(AvatarData, avatarValues['skinColor']))
+    const [nameError, setNameError] = useState('hidden')
 
     const { closeModal } = useModal();
     // console.table(avatar)
@@ -64,13 +65,26 @@ function UpdateCharacterModal(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const avatar_url = createAvatarRoute(AvatarData['eyeBrows'][eyeBrows], AvatarData['eyes'][eyes], AvatarData['mouth'][mouth], AvatarData['hairColor'][hairColor], AvatarData['skinColor'][skinColor], AvatarData['hair'][hair])
-        console.log('avatar url:', avatar_url)
-        const CharacterData = {
-            stats: `{"name":${JSON.stringify(name)},"hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10,"agl":10, "avatarUrl":${JSON.stringify(avatar_url)}}`
+
+        setNameError('hidden')
+        let error = true;
+        if (!name) {
+            setNameError('visible')
+            error = false
         }
-        await dispatch(thunkUpdateChar(CharacterData, id))
-        closeModal()
+
+
+        if (error) {
+            const avatar_url = createAvatarRoute(AvatarData['eyeBrows'][eyeBrows], AvatarData['eyes'][eyes], AvatarData['mouth'][mouth], AvatarData['hairColor'][hairColor], AvatarData['skinColor'][skinColor], AvatarData['hair'][hair])
+            console.log('avatar url:', avatar_url)
+            const CharacterData = {
+                stats: `{"name":${JSON.stringify(name)},"hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10,"agl":10, "avatarUrl":${JSON.stringify(avatar_url)}}`
+            }
+            await dispatch(thunkUpdateChar(CharacterData, id))
+            closeModal()
+        } else {
+            return
+        }
     }
 
 
@@ -210,6 +224,8 @@ function UpdateCharacterModal(props) {
                         placeholder="Character Name"
                         value={name}
                         onChange={updateName} />
+                    <div className="error" style={{ visibility: nameError }}>Please add a name to your character</div>
+
                 </div>
                 <form className="save" onSubmit={handleSubmit}>
                     <button type="submit">save </button>

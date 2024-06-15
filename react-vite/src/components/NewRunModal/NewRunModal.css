@@ -1,0 +1,72 @@
+.newRunContainer {
+    width: 800px;
+    height: 650px;
+    border: 10px ridge #2d1e2f;
+    background-color: #a97c73;
+    margin: 0px;
+}
+
+#modal-content {
+    background-color: #a97c73;
+
+}
+
+.unselectedCharTitle {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: flex-start;
+    max-height: 100px;
+}
+
+.charSelect {
+    height: 250px;
+    display: grid;
+    border: 10px ridge #2d1e2f;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    list-style: none;
+    padding-left: 0;
+    overflow-y: scroll;
+}
+
+.unselectedChar {
+    background-color: #b0c592;
+    border: 10px ridge #2d1e2f;
+    height: 200px;
+    width: 200px;
+}
+
+.unselectedChar>.avatar {
+    height: 100px;
+}
+
+.selected {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 'char1 char2 char3';
+
+}
+
+.selectedChar {
+    background-color: #b0c592;
+    border: 10px ridge #2d1e2f;
+    height: 150px;
+    width: 150px;
+}
+
+#char1 {
+    grid-area: char1;
+}
+
+#char2 {
+    grid-area: char2;
+}
+
+#char3 {
+    grid-area: char3;
+}
+
+.selectedChar>.avatar {
+    height: 100px;
+}

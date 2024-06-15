@@ -16,7 +16,6 @@ function LandingPage() {
     return (
         <>
             <div className="landingPage">
-                <h1>landing Page</h1>
                 <div id='landing_page_container'>
                     <div id='left'>
                         <div id='upper_left_side'>
@@ -32,12 +31,12 @@ function LandingPage() {
                     <div id='right'>
                         <div id='upper_right_side'>
                             <OpenModalMenuItem
-                                itemText=""
+                                itemText="Sign Up"
                                 modalComponent={<SignupFormModal />} />
                         </div>
                         <div id="lower_right_side">
                             <OpenModalMenuItem
-                                itemText=""
+                                itemText="Log in"
                                 modalComponent={<LoginFormModal />} />
                         </div>
                     </div>

@@ -15,6 +15,7 @@ function CharacterCreationModal() {
     const [hair, setHair] = useState(0)
     const [hairColor, setHairColor] = useState(0)
     const [skinColor, setSkinColor] = useState(0)
+    const [nameError, setNameError] = useState('hidden')
 
     const { closeModal } = useModal();
     // console.table(avatar)
@@ -35,13 +36,25 @@ function CharacterCreationModal() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const avatar_url = createAvatarRoute(AvatarData['eyeBrows'][eyeBrows], AvatarData['eyes'][eyes], AvatarData['mouth'][mouth], AvatarData['hairColor'][hairColor], AvatarData['skinColor'][skinColor], AvatarData['hair'][hair])
-        console.log('avatar url:', avatar_url)
-        const CharacterData = {
-            stats: `{"name":${JSON.stringify(name)},"hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10,"agl":10, "avatarUrl":${JSON.stringify(avatar_url)}}`
+
+        setNameError('hidden')
+        let error = true;
+        if (!name) {
+            setNameError('visible')
+            error = false
         }
-        await dispatch(thunkCreateChar(CharacterData))
-        closeModal()
+
+        if (error) {
+            const avatar_url = createAvatarRoute(AvatarData['eyeBrows'][eyeBrows], AvatarData['eyes'][eyes], AvatarData['mouth'][mouth], AvatarData['hairColor'][hairColor], AvatarData['skinColor'][skinColor], AvatarData['hair'][hair])
+            // console.log('avatar url:', avatar_url)
+            const CharacterData = {
+                stats: `{"name":${JSON.stringify(name)},"hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10,"agl":10, "avatarUrl":${JSON.stringify(avatar_url)}}`
+            }
+            await dispatch(thunkCreateChar(CharacterData))
+            closeModal()
+        } else {
+            return
+        }
     }
 
 
@@ -181,6 +194,7 @@ function CharacterCreationModal() {
                         placeholder="Character Name"
                         value={name}
                         onChange={updateName} />
+                    <div className="error" style={{ visibility: nameError }}>Please add a name to your character</div>
                 </div>
                 <form className="save" onSubmit={handleSubmit}>
                     <button type="submit">save </button>

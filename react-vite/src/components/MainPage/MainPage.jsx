@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom";
 import StartPage from "../StartPage";
 
-// import './MainPage.css'
+import './MainPage.css'
 
 
 const MainPage = () => {

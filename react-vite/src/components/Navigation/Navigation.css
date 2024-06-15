@@ -1,3 +1,102 @@
 .profile-dropdown {
   position: absolute;
+
+  right: 10px;
+  top: 30px;
+  margin: 10px;
+  padding: 10px;
+  /* background-color: #181a1b; */
+  color: #b5af8a;
+  box-shadow: 3px 3px 10px rgb(41, 39, 39);
+}
+
+hr {
+  background-color: #b5af8a;
+  height: 1px;
+  border: none;
+}
+
+.landingButton {
+  color: white;
+  background-color: #6f3dcb;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 12px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 5px rgb(41, 39, 39);
+}
+
+.userMenuItem {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.nav-bar {
+  align-items: center;
+  background-color: #a97c73;
+  background-position: 100% 0px;
+  background-repeat: no-repeat;
+  box-shadow: rgba(26, 24, 29, 0.24) 0px 1px 2px 0px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+  max-height: 56px;
+  min-height: 56px;
+  padding: 8px 16px;
+  position: relative;
+  transition: none 0s ease 0s;
+  z-index: 1080;
+}
+
+/* .userButton {
+  background-color: #36205d;
+  color: white;
+} */
+
+.nav-home {
+  font-family: "Press Start 2P", cursive;
+  color: #ffffff;
+}
+
+.nav-links-ctn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.nav-links {
+  padding: 0 16px;
+  display: flex;
+  /* justify-content: flex-start; */
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  height: 51px;
+}
+
+.nav-links:hover {
+  background-color: #cd958a;
+}
+
+.nav-links.active {
+  border-bottom: 5px solid #cd958a;
+}
+
+.profile-button {
+  width: fit-content;
+  font-size: 15px;
+  margin-left: auto;
+  justify-content: flex-end;
+  position: relative;
+  padding: 10px;
+}
+
+#logo {
+  margin-top: 1px;
+  max-height: 50px;
+  background-color: #eae8f1;
+  border-radius: 11px;
 }

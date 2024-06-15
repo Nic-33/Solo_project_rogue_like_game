@@ -353,6 +353,7 @@
     grid-area: eventLog;
     border: 10px ridge #2d1e2f;
     background-color: #a97c73;
+    overflow-y: scroll;
     height: auto;
 }
 

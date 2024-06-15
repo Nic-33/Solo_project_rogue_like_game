@@ -103,61 +103,72 @@ function NewRunModal() {
             .then(() => setLoaded(true))
     }, [dispatch])
 
-    return (<>
-        {loaded && <div>
-            <h1>character select</h1>
-            <h3>select up to 3 characters</h3>
-            {chars.map((char) => {
-                let display = true
-                console.log(char)
-                let stats = char.stats
-                if (char.id === char_1.char_id || char.id === char_2.char_id || char.id === char_3.char_id) {
-                    display = false
-                }
-                return (<>
-                    {display && <div>
-                        <div>{stats.name}</div>
-                        {stats.avatarUrl && <img className="avatar" src={stats.avatarUrl} alt='avatar' />}
-                        <form onSubmit={selectCharacter}>
-                            <button type="submit" onClick={() => {
-                                setSelChar(char)
-                            }}>select</button>
-                        </form>
-                        <OpenModalMenuItem
-                            itemText="Edit"
-                            modalComponent={<UpdateCharacterModal props={char} />} />
-                        <form onSubmit={deleteCharacter}>
-                            <button type="submit" onClick={() => {
-                                setCharDel(char.id)
-                            }}>delete character</button>
-                        </form>
-                    </div>}</>)
-            })}
+    return (<div className="newRunContainer">
+        {loaded && <div >
+            <div className="unselectedCharTitle">
+                <h1>Character select</h1>
+                <h3>Select up to 3 characters</h3>
+            </div>
+            <div className="charSelect">
+                {chars.map((char) => {
+                    let display = true
+                    // console.log(char)
+                    let stats = char.stats
+                    if (char.id === char_1.char_id || char.id === char_2.char_id || char.id === char_3.char_id) {
+                        display = false
+                    }
+                    return (<>
+                        {display && <div className="unselectedChar">
+                            <div className="unselectedCharName">{stats.name}</div>
+                            {stats.avatarUrl && <img className="avatar" src={stats.avatarUrl} alt='avatar' />}
+                            <form onSubmit={selectCharacter}>
+                                <button className="unselectedCharSelect" type="submit" onClick={() => {
+                                    setSelChar(char)
+                                }}>Select</button>
+                            </form>
+                            <OpenModalMenuItem
+                                itemText="Edit"
+                                modalComponent={<UpdateCharacterModal props={char} />} />
+                            <form onSubmit={deleteCharacter}>
+                                <button className="delete" type="submit" onClick={() => {
+                                    setCharDel(char.id)
+                                }}>Delete Character</button>
+                            </form>
+                        </div>}</>)
+                })}
+            </div>
 
-            <div className="Selected Characters">
+            <div className="SelectedCharacters">
                 <h3>Selected Characters</h3>
-                {char_1 && <>
-                    <div>{char_1.stats.name}</div>
-                    {char_1.stats.avatarUrl && <img className="avatar" src={char_1.stats.avatarUrl} alt='avatar' />}
-                    <button onClick={() => setChar_1('')}>Unselect</button>
-                </>}
-                {char_2 && <>
-                    <div>{char_2.stats.name}</div>
-                    {char_2.stats.avatarUrl && <img className="avatar" src={char_2.stats.avatarUrl} alt='avatar' />}
-                    <button onClick={() => setChar_2('')}>Unselect</button>
-
-                </>}
-                {char_3 && <>
-                    <div>{char_3.stats.name}</div>
-                    {char_3.stats.avatarUrl && <img className="avatar" src={char_3.stats.avatarUrl} alt='avatar' />}
-                    <button onClick={() => setChar_3('')}>Unselect</button>
-                </>}
+                <div className="selected">
+                    {char_1 && <>
+                        <div className="selectedChar" tag='char1'>
+                            <div className="selectedCharName" >{char_1.stats.name}</div>
+                            {char_1.stats.avatarUrl && <img className="avatar" src={char_1.stats.avatarUrl} alt='avatar' />}
+                            <button className="selectedCharUnselect" onClick={() => setChar_1('')}>Unselect</button>
+                        </div>
+                    </>}
+                    {char_2 && <>
+                        <div className="selectedChar" tag='char2'>
+                            <div className="selectedCharName">{char_2.stats.name}</div>
+                            {char_2.stats.avatarUrl && <img className="avatar" src={char_2.stats.avatarUrl} alt='avatar' />}
+                            <button className="selectedCharUnselect" onClick={() => setChar_2('')}>Unselect</button>
+                        </div>
+                    </>}
+                    {char_3 && <>
+                        <div className="selectedChar" tag='char3'>
+                            <div className="selectedCharName">{char_3.stats.name}</div>
+                            {char_3.stats.avatarUrl && <img className="avatar" src={char_3.stats.avatarUrl} alt='avatar' />}
+                            <button className="selectedCharUnselect" onClick={() => setChar_3('')}>Unselect</button>
+                        </div>
+                    </>}
+                </div>
             </div>
             <form className="startRun" onSubmit={handleSubmit}>
-                <button onClick={(e) => handleSubmit(e)}>Start Run</button>
+                <button className="startRunButton" onClick={(e) => handleSubmit(e)}>Start Run</button>
             </form>
         </div>}
-    </>)
+    </div>)
 
 }
 
