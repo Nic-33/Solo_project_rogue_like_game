@@ -27,7 +27,8 @@ def seed():
         undo_character_info()
         undo_inventory()
         undo_run()
-        undo_user_info
+        undo_useable_item()
+        undo_user_info()
     seed_users()
     seed_gear()
     seed_character_info()
@@ -47,5 +48,5 @@ def undo():
     undo_character_info()
     undo_inventory()
     undo_run()
-    undo_user_info
+    undo_user_info()
     # Add other undo functions here
