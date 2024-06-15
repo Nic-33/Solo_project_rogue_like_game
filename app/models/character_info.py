@@ -6,11 +6,18 @@ class Character_info (db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer(), primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey("users.id"),nullable=False)
-    inv_id = db.Column(db.Integer(), db.ForeignKey("inventory.id"), nullable=False)
-    gear_id = db.Column(db.Integer(), db.ForeignKey('gear.id'), nullable=False)
-    stats = db.Column(db.String(), nullable=False)
+    if environment == 'production':
+        id = db.Column(db.Integer(), primary_key=True)
+        user_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod("users.id")),nullable=False)
+        inv_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod("inventory.id")), nullable=False)
+        gear_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod('gear.id')), nullable=False)
+        stats = db.Column(db.String(), nullable=False)
+    else :
+        id = db.Column(db.Integer(), primary_key=True)
+        user_id = db.Column(db.Integer(), db.ForeignKey("users.id"),nullable=False)
+        inv_id = db.Column(db.Integer(), db.ForeignKey("inventory.id"), nullable=False)
+        gear_id = db.Column(db.Integer(), db.ForeignKey('gear.id'), nullable=False)
+        stats = db.Column(db.String(), nullable=False)
 
     users = db.relationship("User", back_populates="char_info")
     inventory = db.relationship("Inventory", back_populates="char_info")

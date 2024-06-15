@@ -6,9 +6,15 @@ class Useable_item (db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer(), primary_key=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey("users.id"),nullable=False)
-    useable_inv = db.Column(db.String(), nullable=False)
+
+    if environment == 'production':
+        id = db.Column(db.Integer(), primary_key=True)
+        user_id = db.Column(db.Integer(), db.ForeignKey(add_prefix_for_prod("users.id")),nullable=False)
+        useable_inv = db.Column(db.String(), nullable=False)
+    else:
+        id = db.Column(db.Integer(), primary_key=True)
+        user_id = db.Column(db.Integer(), db.ForeignKey("users.id"),nullable=False)
+        useable_inv = db.Column(db.String(), nullable=False)
 
     users = db.relationship("User", back_populates="useable_items")
 
