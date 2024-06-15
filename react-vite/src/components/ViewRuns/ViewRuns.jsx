@@ -22,8 +22,8 @@ function ViewRuns() {
 
             {runs.map((run) => {
                 return (
-                    <NavLink >
-                        <p key={run.id}>{run.id}</p>
+                    <NavLink key={run.id}>
+                        <p>{run.id}</p>
                     </NavLink>
                 )
             })}

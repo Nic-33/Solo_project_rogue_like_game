@@ -21,7 +21,7 @@ function InventoryModal(props) {
     return <>
         <h1>{props.tag} menu</h1>
         {inv[props.tag].map((item) => {
-            return <h2>{data[item].name}</h2>
+            return <h2 key={data[item].name}>{data[item].name}</h2>
         })}
     </>
 }

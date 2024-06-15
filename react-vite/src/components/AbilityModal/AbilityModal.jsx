@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { thunkGetChar_inv, thunkUpdateChar_inv } from "../../redux/character_inv";
-import { thunkGetGear, thunkUpdateGear } from "../../redux/gear";
+
 import { useModal } from "../../context/Modal";
 import "./AbilityModal.css";
 

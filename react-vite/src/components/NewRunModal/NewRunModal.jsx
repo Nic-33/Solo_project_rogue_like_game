@@ -34,7 +34,6 @@ function NewRunModal() {
     const characterSlice = useSelector((state) => state.character)
     const chars = Object.values(characterSlice)
     // console.log('Chars:', chars)
-    const [errors, setErrors] = useState({});
     const [selChar, setSelChar] = useState('')
     const [loaded, setLoaded] = useState(false)
     const [charDel, setCharDel] = useState('')
