@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal/SignupFormModal.jsx";
 import OpenModalMenuItem from "./OpenModalMenuItem.jsx";
+import logo from '../../Images/logo.png'
 import "./LandingPage.css";
 
 
@@ -19,10 +20,10 @@ function LandingPage() {
                 <div id='landing_page_container'>
                     <div id='left'>
                         <div id='upper_left_side'>
-                            <h3></h3>
+                            <h3>Welcome to</h3>
                         </div>
                         <div id='middle'>
-                            <h1> </h1>
+                            <img id='mainLogo' src={logo} alt='home' />
                         </div>
                         <div id='lower_left_side'>
                             <h3></h3>

@@ -1,6 +1,3 @@
 .dataPage {
-    background: #214E34;
-    background: -moz-radial-gradient(center, #214E34 0%, #378156 50%, #47A870 100%);
-    background: -webkit-radial-gradient(center, #214E34 0%, #378156 50%, #47A870 100%);
-    background: radial-gradient(ellipse at center, #214E34 0%, #378156 50%, #47A870 100%);
+    background-color: #384243;
 }

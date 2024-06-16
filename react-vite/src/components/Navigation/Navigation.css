@@ -18,7 +18,7 @@ hr {
 
 .landingButton {
   color: white;
-  background-color: #6f3dcb;
+  /* background-color: #6f3dcb; */
   cursor: pointer;
   padding: 8px;
   font-size: 12px;
@@ -36,7 +36,7 @@ hr {
 
 .nav-bar {
   align-items: center;
-  background-color: #a97c73;
+  background-color: #141c1d;
   background-position: 100% 0px;
   background-repeat: no-repeat;
   box-shadow: rgba(26, 24, 29, 0.24) 0px 1px 2px 0px;
@@ -78,11 +78,11 @@ hr {
 }
 
 .nav-links:hover {
-  background-color: #cd958a;
+  background-color: #242f30;
 }
 
 .nav-links.active {
-  border-bottom: 5px solid #cd958a;
+  border-bottom: 5px solid #242f30;
 }
 
 .profile-button {

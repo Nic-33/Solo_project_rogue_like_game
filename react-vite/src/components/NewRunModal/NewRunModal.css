@@ -2,7 +2,9 @@
     width: 800px;
     height: 650px;
     border: 10px ridge #2d1e2f;
-    background-color: #a97c73;
+    background-image: url('../../Images/tavern.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0px;
 }
 
@@ -31,7 +33,7 @@
 }
 
 .unselectedChar {
-    background-color: #b0c592;
+    background-color: #384243;
     border: 10px ridge #2d1e2f;
     height: 200px;
     width: 200px;
@@ -49,7 +51,7 @@
 }
 
 .selectedChar {
-    background-color: #b0c592;
+    background-color: #384243;
     border: 10px ridge #2d1e2f;
     height: 150px;
     width: 150px;

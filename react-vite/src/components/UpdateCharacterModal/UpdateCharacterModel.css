@@ -9,8 +9,10 @@
         'save save save';
     width: 600px;
     height: 400px;
-    background-color: #a97c73;
-    border: 10px ridge #2d1e2f;
+    background-image: url('../../Images/tavern.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+        border: 10px ridge #2d1e2f;
 }
 
 .characterCreator>.avatar {
@@ -33,7 +35,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #b0c592;
+    background-color: #384243;
     border: 10px ridge #2d1e2f;
     width: 200px;
     height: 200px;
@@ -57,7 +59,7 @@
 
 .save>button {
     width: 100px;
-    height: 20px;
+    height: 40px;
 }
 
 .skinColor {

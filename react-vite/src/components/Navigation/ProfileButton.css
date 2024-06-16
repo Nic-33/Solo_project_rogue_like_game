@@ -5,18 +5,18 @@
     right: .5%;
     border: 5px ridge #2d1e2f;
     border-radius: 18px;
-    background-color: #a97c73;
+    background-color: #141c1d;
 }
 
 .profile-dropdown {
-    color: black;
+    color: white;
     list-style-type: none;
 }
 
 .profileButton {
     align-content: end;
     border: 5px ridge #2d1e2f;
-    color: black;
+    color: white;
     font-size: 16px;
     line-height: 16px;
     padding: 5px;
@@ -27,7 +27,7 @@
     font-style: normal;
     font-variant: normal;
     text-transform: none;
-    background-color: #b0c592;
+    background-color: #141c1d;
     /* display: inline-block; */
 }
 
@@ -54,7 +54,7 @@
     font-style: normal;
     font-variant: normal;
     text-transform: none;
-    background-color: #b0c592;
+    background-color: #141c1d;
     border: 2px ridge #2d1e2f;
 }
 
@@ -79,7 +79,7 @@
     font-style: normal;
     font-variant: normal;
     text-transform: none;
-    background-color: #b0c592;
+    background-color: #141c1d;
     border: 2px ridge #2d1e2f;
 }
 

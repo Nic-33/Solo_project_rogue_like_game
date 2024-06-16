@@ -15,6 +15,9 @@
     height: 650px;
     border: 10px ridge #2d1e2f;
     background-color: #a97c73;
+    background-image: url('../../Images/map.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     margin: 0px;
 
 }
@@ -30,7 +33,7 @@
 }
 
 .run {
-    background-color: #b0c592;
+    background-color: #384243;
     border: 10px ridge #2d1e2f;
     height: 200px;
     width: 300px;

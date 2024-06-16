@@ -5,10 +5,7 @@
     top: 0px;
     height: 100vh;
     width: 100vw;
-    background: #214E34;
-    background: -moz-radial-gradient(center, #214E34 0%, #378156 50%, #47A870 100%);
-    background: -webkit-radial-gradient(center, #214E34 0%, #378156 50%, #47A870 100%);
-    background: radial-gradient(ellipse at center, #214E34 0%, #378156 50%, #47A870 100%);
+    background: #384243;
 }
 
 /* background-color: #6133b4;
@@ -33,7 +30,7 @@
 #left {
     grid-area: left;
     display: grid;
-    grid-template-rows: 30% 20% 50%;
+    grid-template-rows: 1fr 500px 1fr;
     grid-template-areas:
         'upperleft'
         'middle'
@@ -88,6 +85,10 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+}
+
+#middle>#mainLogo {
+    height: 500px
 }
 
 .myButton {

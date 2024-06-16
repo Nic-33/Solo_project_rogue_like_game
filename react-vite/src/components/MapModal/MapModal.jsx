@@ -78,18 +78,19 @@ function MapModal(props) {
 
     return <>
         <div id='map'>
-            <h1>Select Your Next Room</h1>
+            <h1 className="mapTitle">Select Your Next Room</h1>
             <form>
-                {floor.map((room) => {
-                    if (room.roomType === 'enemy') {
-                        // console.log('room', room.enemy[0])
-                        return <button key={room.enemy.name} onClick={() => Enemy(room.enemy)}>{room.roomType}</button>
-                    } else if (room.roomType === 'shop') {
-                        return <button key={room.roomType} onClick={() => Shop(room)}>{room.roomType}</button>
-                    } else if (room.roomType === 'boss') {
-                        return <button key={room.roomType} onClick={() => Boss(room)}>{room.roomType}</button>
-                    }
-                })}
+                <div className="mapBut">
+                    {floor.map((room) => {
+                        if (room.roomType === 'enemy') {
+                            // console.log('room', room.enemy[0])
+                            return <button key={room.enemy.name} onClick={() => Enemy(room.enemy)}>{room.roomType}</button>
+                        } else if (room.roomType === 'shop') {
+                            return <button key={room.roomType} onClick={() => Shop(room)}>{room.roomType}</button>
+                        } else if (room.roomType === 'boss') {
+                            return <button key={room.roomType} onClick={() => Boss(room)}>{room.roomType}</button>
+                        }
+                    })}</div>
             </form>
         </div>
     </>
