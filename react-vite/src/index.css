@@ -21,23 +21,23 @@ button {
     font-size: 15px;
     line-height: 15px;
     padding: 4px;
-    border-radius: 50px;
+    border-radius: 0px;
     font-family: Georgia, serif;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
     font-variant: normal;
     text-transform: none;
-    background-image: linear-gradient(to right, rgb(33, 78, 52) 0%, rgb(55, 129, 86) 50%, rgb(71, 168, 112) 100%);
+    background-image: radial-gradient(rgb(168, 168, 168) 0%, rgb(36, 47, 48) 50%, rgb(20, 28, 29) 100%);
     box-shadow: rgba(0, 0, 0, 0) 1px 5px 15px 5px;
     border: 2px solid rgb(0, 0, 0);
     display: inline-block;
 }
 
 button:hover {
-    background: #214E34;
+    background: #A8A8A8;
 }
 
 button:active {
-    background: #47A870;
+    background: #141C1D;
 }
