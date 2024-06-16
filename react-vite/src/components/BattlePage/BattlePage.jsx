@@ -6,6 +6,9 @@ import OpenModalMenuItem from "./OpenModalMenuItem"
 import MapModal from "../MapModal/MapModal";
 import './BattlePageCharacter.css'
 
+let moreSoon = () => alert("More coming soon")
+
+
 function getRandomIntInclusive(min, max) {
     const minCeiled = Math.ceil(min);
     const maxFloored = Math.floor(max);
@@ -47,6 +50,7 @@ function BattlePage(props) {
     }
 
     const [roomClear, setRoomClear] = useState('visible')
+    const [endRun, setEndRun] = useState('hidden')
 
     const [mon_1, setMon_1] = useState()
     const [monAlive1, setMonAlive1] = useState(false)
@@ -129,7 +133,8 @@ function BattlePage(props) {
         setEventLog(event)
 
         if (target_char === 'char_1') {
-            if (char.stats.curhp <= 0) {
+            if (char.curhp <= 0) {
+                char.curhp = 0
                 setCharAlive1(false)
                 event = eventLog
                 event.splice(1, 0, `${char.stats.name} died`)
@@ -137,7 +142,8 @@ function BattlePage(props) {
             }
             setChar_1(char)
         } else if (target_char === 'char_2') {
-            if (char.stats.curhp <= 0) {
+            if (char.curhp <= 0) {
+                char.curhp = 0
                 setCharAlive2(false)
                 event = eventLog
                 event.splice(1, 0, `${char.stats.name} died`)
@@ -145,7 +151,8 @@ function BattlePage(props) {
             }
             setChar_2(char)
         } else if (target_char === 'char_3') {
-            if (char.stats.curhp <= 0) {
+            if (char.curhp <= 0) {
+                char.curhp = 0
                 setCharAlive3(false)
                 event = eventLog
                 event.splice(1, 0, `${char.stats.name} died`)
@@ -376,19 +383,27 @@ function BattlePage(props) {
             setHideMenuChar1('hidden')
             setHideMenuChar2('hidden')
             setHideMenuChar3('hidden')
-            setRoomClear('visible')
-            let seed = JSON.stringify(seedData)
-            let char1 = JSON.stringify(char_1)
-            let char2 = JSON.stringify(char_2)
-            let char3 = JSON.stringify(char_3)
-            let data = {
-                char_1: char1,
-                char_2: char2,
-                char_3: char3,
-                seed
+            console.log(seedData.length)
+            if (seedData.length > 0) {
+                setRoomClear('visible')
+                let char1 = JSON.stringify(char_1)
+                let char2 = JSON.stringify(char_2)
+                let char3 = JSON.stringify(char_3)
+                let seed = JSON.stringify(seedData)
+                let data = {
+                    char_1: char1,
+                    char_2: char2,
+                    char_3: char3,
+                    seed
+                }
+                // console.log('char1:', data)
+                dispatch(thunkUpdateRun(data, id))
+            } else {
+                setEndRun('visible')
             }
-            // console.log('char1:', data)
-            dispatch(thunkUpdateRun(data, id))
+
+
+
 
         }
         if ((!charAlive1 || char_1.curhp <= 0) && (!charAlive2 || char_2.curhp <= 0) && (!charAlive3 || char_3.curhp <= 0)) {
@@ -400,7 +415,6 @@ function BattlePage(props) {
             setHideMenuChar2('hidden')
             setHideMenuChar3('hidden')
             setRoomClear('visible')
-            dispatch(thunkDeleteRun(id))
             setLose(true)
         }
     }
@@ -580,6 +594,9 @@ function BattlePage(props) {
                                 setHideMenuChar3
                             }} />}
                     />
+                </div>
+                <div className="nextFloorButton" style={{ visibility: endRun }}>
+                    <button onClick={moreSoon}>End Run</button>
                 </div>
             </div>
         </> : <>

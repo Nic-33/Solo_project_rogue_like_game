@@ -38,7 +38,7 @@ function Navigation({ isLoaded }) {
           {sessionUser ? loggedInLinks : loggedOutLinks}
         </div>
         <div className="profile-button">
-          <ProfileButton />
+          <ProfileButton user={sessionUser}/>
         </div>
       </div>
     </nav>

@@ -13,51 +13,61 @@ function LoginFormModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setErrors('')
+    let errorHolder = []
+    let error = {}
     const serverResponse = await dispatch(
       thunkLogin({
         email,
         password,
       })
     );
-
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
+    if (!serverResponse) {
       closeModal();
+    } else {
+      errorHolder = serverResponse.errors
+      console.log(errorHolder)
+      errorHolder.forEach(ele => {
+        let key = Object.keys(ele)
+        let value = Object.values(ele)
+        error[key[0]] = value[0]
+      });
+      setErrors(error);
     }
   };
 
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
-        <button type="submit" onClick={() => {
-          setEmail('demo@aa.io')
-          setPassword('password')
-        }}>Demo Login</button>
-      </form>
+      <div id='loginForm'>
+        <h1>Log In</h1>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Email
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          {errors.email && <p>{errors.email}</p>}
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          {errors.password && <p>{errors.password}</p>}
+          <button type="submit">Log In</button>
+          <button type="submit" onClick={() => {
+            setEmail('demo@aa.io')
+            setPassword('password')
+          }}>Demo Login</button>
+        </form>
+      </div>
     </>
   );
 }

@@ -5,11 +5,11 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_character_info():
     character_info1 = Character_info(
-        user_id=1, inv_id=1, gear_id=1, stats='{"name":"Jon","hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10, "agl":10}')
+        user_id=1, inv_id=1, gear_id=1, stats='{"name":"Jon","hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10, "agl":10,"avatarUrl":"https://api.dicebear.com/8.x/adventurer/svg?eyebrows=variant01&eyes=variant01&mouth=variant01&hair=short01&hairColor=0e0e0e&skinColor=9e5622"}')
     character_info2 = Character_info(
-        user_id=1, inv_id=2, gear_id=2, stats='{"name":"Zander","hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10, "agl":10}')
+        user_id=1, inv_id=2, gear_id=2, stats='{"name":"Zander","hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10, "agl":10,"avatarUrl":"https://api.dicebear.com/8.x/adventurer/svg?eyebrows=variant01&eyes=variant01&mouth=variant01&hair=short01&hairColor=0e0e0e&skinColor=9e5622"}')
     character_info3 = Character_info(
-        user_id=1, inv_id=3, gear_id=3, stats='{"name":"Momo","hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10,"agl":10}')
+        user_id=1, inv_id=3, gear_id=3, stats='{"name":"Momo","hp":100,"patk":10,"matk":10,"pdef":10,"mdef":10,"agl":10, "avatarUrl":"https://api.dicebear.com/8.x/adventurer/svg?eyebrows=variant01&eyes=variant01&mouth=variant01&hair=short01&hairColor=0e0e0e&skinColor=9e5622"}')
 
     db.session.add(character_info1)
     db.session.add(character_info2)

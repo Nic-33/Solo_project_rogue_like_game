@@ -1,0 +1,92 @@
+.char1>.avatar {
+    height: 50px;
+}
+
+.char2>.avatar {
+    height: 50px;
+}
+
+.char3>.avatar {
+    height: 50px;
+}
+
+#runList {
+    width: 1000px;
+    height: 650px;
+    border: 10px ridge #2d1e2f;
+    background-color: #a97c73;
+    margin: 0px;
+
+}
+
+.runs {
+    height: 550px;
+    display: grid;
+    border: 10px ridge #2d1e2f;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    list-style: none;
+    padding-left: 0;
+    overflow-y: scroll;
+}
+
+.run {
+    background-color: #b0c592;
+    border: 10px ridge #2d1e2f;
+    height: 200px;
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: 1fr 30px 10px;
+    grid-template-areas: 'char1 char2 char3'
+        'but but but'
+        'fl fl fl';
+
+}
+
+.char1 {
+    grid-area: char1;
+    border: 5px ridge #2d1e2f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.char2 {
+    grid-area: char2;
+    border: 5px ridge #2d1e2f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.char3 {
+    grid-area: char3;
+    border: 5px ridge #2d1e2f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttonArea {
+    grid-area: but;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.run>.floorNumber {
+    grid-area: fl;
+    background-color: #b0c592;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 150px;
+
+}
+
+.runsTitle {
+    display: flex;
+    justify-content: center;
+
+}

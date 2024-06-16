@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import NewRunModal from "../NewRunModal/NewRunModal";
 import OpenModalMenuItem from "./OpenModalMenuItem"
 import CharacterCreationModal from "../CharacterCreationModal/CharacterCreationModal";
+import RunPage from "../RunPage/RunPage";
 
 
 // import './StartPage.css'
@@ -19,7 +20,10 @@ const StartPage = () => {
                 itemText="New Run"
                 modalComponent={<NewRunModal />}
             />
-            <NavLink to={'/run'}>Continue</NavLink>
+            <OpenModalMenuItem
+                itemText="Continue A Run"
+                modalComponent={<RunPage />}
+            />
         </div>
     </div>
 }

@@ -1,0 +1,91 @@
+.profile-dropdown {
+    position: absolute;
+    margin: 3px;
+    padding: 10px;
+    right: .5%;
+    border: 5px ridge #2d1e2f;
+    border-radius: 18px;
+    background-color: #a97c73;
+}
+
+.profile-dropdown {
+    color: black;
+    list-style-type: none;
+}
+
+.profileButton {
+    align-content: end;
+    border: 5px ridge #2d1e2f;
+    color: black;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 5px;
+    border-radius: 18px;
+    font-family: Georgia, serif;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    background-color: #b0c592;
+    /* display: inline-block; */
+}
+
+.profileButton:hover {
+    background: grey;
+}
+
+.profileButton:active {
+    background: lightgray;
+}
+
+
+
+
+#loggedIn>li>button {
+    color: rgb(211, 211, 211);
+    font-size: 16px;
+    line-height: 16px;
+    padding: 7px;
+    border-radius: 48px;
+    font-family: Georgia, serif;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    background-color: grey;
+    border: 2px solid black;
+}
+
+#loggedIn>li>button:hover {
+    background: rgb(65, 65, 65);
+}
+
+#loggedIn>li>button:active {
+    background: rgb(192, 192, 192);
+}
+
+#loggedOut>li>button {
+    color: rgb(211, 211, 211);
+    font-size: 16px;
+    line-height: 16px;
+    padding: 7px;
+    border-radius: 48px;
+    font-family: Georgia, serif;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    background-color: grey;
+    border: 2px solid black;
+}
+
+#loggedOut>li>button:hover {
+    background: rgb(65, 65, 65);
+}
+
+#loggedOut>li>button:active {
+    background: rgb(192, 192, 192);
+}

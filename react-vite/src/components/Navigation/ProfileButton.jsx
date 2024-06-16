@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaUserCircle } from 'react-icons/fa';
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
+import { CiBoxList } from "react-icons/ci";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import './ProfileButton.css'
 
-function ProfileButton() {
+function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
 
   const toggleMenu = (e) => {
@@ -38,38 +39,46 @@ function ProfileButton() {
     dispatch(thunkLogout());
     closeMenu();
   };
+  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+
 
   return (
     <>
-      <button onClick={toggleMenu}>
+      <button className='profileButton' onClick={toggleMenu}>
+        <CiBoxList />
         <FaUserCircle />
       </button>
-      {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
-          {user ? (
-            <>
-              <li>{user.username}</li>
+      <ul className={ulClassName} ref={ulRef}>
+        {user ? (
+          <>
+            <div id='loggedIn'>
+              <li>Hello, {user.username}</li>
               <li>{user.email}</li>
-              <li>
+
+              <li id='button'>
                 <button onClick={logout}>Log Out</button>
               </li>
-            </>
-          ) : (
-            <>
-              <OpenModalMenuItem
-                itemText="Log In"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-              <OpenModalMenuItem
-                itemText="Sign Up"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
-            </>
-          )}
-        </ul>
-      )}
+            </div>
+          </>
+        ) : (
+          <>
+            <div id='loggedOut'>
+              <li >
+                <OpenModalMenuItem
+                  buttonText="Log In"
+                  modalComponent={<LoginFormModal />}
+                />
+              </li>
+              <li>
+                <OpenModalMenuItem
+                  buttonText="Sign Up"
+                  modalComponent={<SignupFormModal />}
+                />
+              </li>
+            </div>
+          </>
+        )}
+      </ul>
     </>
   );
 }
