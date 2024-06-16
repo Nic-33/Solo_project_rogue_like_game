@@ -1,12 +1,18 @@
 .landingPage {
-    color:white;
+    color: white;
     display: flex;
     position: absolute;
     top: 0px;
     height: 100vh;
     width: 100vw;
-    background-color: #6133b4;
+    background: #214E34;
+    background: -moz-radial-gradient(center, #214E34 0%, #378156 50%, #47A870 100%);
+    background: -webkit-radial-gradient(center, #214E34 0%, #378156 50%, #47A870 100%);
+    background: radial-gradient(ellipse at center, #214E34 0%, #378156 50%, #47A870 100%);
 }
+
+/* background-color: #6133b4;
+} */
 
 #landing_page_container {
     top: 0px;
@@ -14,7 +20,7 @@
     width: 100vw;
     margin-left: 10%;
     margin-right: 10%;
-    background-color: #a97c73;
+    /* background-color: #a97c73; */
     display: grid;
     grid-template-columns: repeat(2, 50%);
     grid-template-rows: auto;
@@ -85,12 +91,12 @@
 }
 
 .myButton {
-    color: rgb(255, 255, 255);
+    /* color: rgb(255, 255, 255); */
     font-size: 30px;
     line-height: 30px;
     padding: 6px;
-    border-radius:10px;
-    font-family: Georgia, serif;
+    border-radius: 10px;
+    /* font-family: Georgia, serif;
     font-weight: normal;
     text-decoration: none;
     font-style: normal;
@@ -102,4 +108,5 @@
     .myButton:hover {
     background: #6133B4; }
     .myButton:active {
-    background: #432874; }
+    background: #432874; } */
+}

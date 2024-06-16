@@ -3,6 +3,8 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    border: 5px ridge #2d1e2f;
+
 }
 
 #signUpForm>form {
@@ -24,7 +26,7 @@
     width: 400px;
 }
 
-#signUpForm>form>button {
+/* #signUpForm>form>button {
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -53,4 +55,4 @@
 
 #signUpForm>form>button:active {
     background: #144E75;
-}
+} */

@@ -6,18 +6,18 @@
     grid-template-columns: 80% 20%;
     grid-template-areas: 'battleArea eventLog';
     /* max-width: 80%; */
-    height: 800px;
+    height: 100vh;
+
 }
 
 .battleArea {
-    background-color: coral;
     grid-area: battleArea;
     display: grid;
-    grid-template-rows: 80% 20%;
+    grid-template-rows: 600px 160px;
     grid-template-areas:
         'monsterArea'
         'charArea';
-    height: 100%;
+    height: 100vh;
     width: 100%;
 }
 
@@ -354,7 +354,7 @@
     border: 10px ridge #2d1e2f;
     background-color: #a97c73;
     overflow-y: scroll;
-    height: auto;
+    height: 760px;
 }
 
 .eventLogTitle {
@@ -373,7 +373,7 @@
 /* Buttons */
 .nextFloorButton {
     position: fixed;
-    background-color: blue;
+    /* background-color: blue; */
     top: 50%;
     left: 50%;
     margin-top: -100px;

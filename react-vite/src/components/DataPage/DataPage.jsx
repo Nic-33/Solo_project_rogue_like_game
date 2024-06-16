@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import BattlePage from "../BattlePage"
 import { useParams } from "react-router-dom"
 import { thunkGetRuns } from "../../redux/run"
+import './DataPage.css'
 
 function DataPage() {
     const { run_id } = useParams()
@@ -28,7 +29,7 @@ function DataPage() {
     }, [dispatch])
 
     return <>
-        {loaded && <div>
+        {loaded && <div className="dataPage">
             <BattlePage props={run} state={{ eventLog, char_1, char_2, char_3, mon_1, mon_2, mon_3, seedData }} setState={{ setEventLog, setChar_1, setChar_2, setChar_3, setMon_1, setMon_2, setMon_3, setSeedData }} />
         </div>}
     </>
