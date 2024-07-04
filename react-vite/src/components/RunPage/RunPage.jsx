@@ -6,7 +6,7 @@ import './RunPage.css'
 
 function RunPage() {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const navigate = useNaigate()
     const { run_id } = useParams()
     const [loaded, setLoaded] = useState(false)
     const [runSelect, setRunSelect] = useState(false)
