@@ -7,7 +7,7 @@ import { thunkCreateRun } from "../../redux/run";
 import { useNavigate } from "react-router-dom";
 import OpenModalMenuItem from './OpenModalMenuItem'
 import UpdateCharacterModal from "../UpdateCharacterModal/UpdateCharacterModal";
-
+import GearModal from "../GearModal/GearModal";
 
 function getRandomIntInclusive(min, max) {
     const minCeiled = Math.ceil(min);
@@ -126,8 +126,11 @@ function NewRunModal() {
                                 }}>Select</button>
                             </form>
                             <OpenModalMenuItem
-                                itemText="Edit"
+                                itemText="Edit Appearance"
                                 modalComponent={<UpdateCharacterModal props={char} />} />
+                            <OpenModalMenuItem
+                                itemText='Open Inventory'
+                                modalComponent={<GearModal props={char} />} />
                             <form onSubmit={deleteCharacter}>
                                 <button className="delete" type="submit" onClick={() => {
                                     setCharDel(char.id)

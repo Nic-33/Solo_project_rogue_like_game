@@ -9,7 +9,7 @@ import OpenModalMenuItem from "./OpenModalMenuItem"
 import InventoryModal from "../InventoryModal/InventoryModal";
 
 function GearModal(props) {
-    const { char_id } = props.state_char
+    const char_id = props.props.id
     const dispatch = useDispatch();
     const gearSlice = useSelector((state) => state.gear)
     const [gearLoaded, setGearLoaded] = useState(false)
@@ -56,7 +56,7 @@ function GearModal(props) {
                     <OpenModalMenuItem
                         itemText="change equipped item"
                         onItemClick={closeMenu}
-                        modalComponent={<InventoryModal tag={'chest'} currentEquip={chestData[gearSlice.chest]} />}
+                        modalComponent={<InventoryModal props={[props.props, char_id]} tag={'chest'} currentEquip={chestData[gearSlice.chest]} />}
                     />
                 </div>
                 <div className="leftHand">
@@ -65,7 +65,7 @@ function GearModal(props) {
                     <OpenModalMenuItem
                         itemText="change equipped item"
                         onItemClick={closeMenu}
-                        modalComponent={<InventoryModal tag={'left'} currentEquip={leftData[gearSlice.left]} />}
+                        modalComponent={<InventoryModal props={[props.props, char_id]} tag={'left'} currentEquip={leftData[gearSlice.left]} />}
                     />
                 </div>
                 <div className="rightHand">
@@ -74,7 +74,7 @@ function GearModal(props) {
                     <OpenModalMenuItem
                         itemText="change equipped item"
                         onItemClick={closeMenu}
-                        modalComponent={<InventoryModal tag={'right'} currentEquip={rightData[gearSlice.right]} />}
+                        modalComponent={<InventoryModal props={[props.props, char_id]} tag={'right'} currentEquip={rightData[gearSlice.right]} />}
                     />
                 </div>
             </form>
