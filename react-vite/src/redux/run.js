@@ -75,6 +75,10 @@ export const thunkCreateRun = (payload) => async (dispatch) => {
     })
     if (response.ok) {
         const run = await response.json()
+        if (run.errors) {
+            console.log('Errors!!!!!!:', data.errors)
+            return;
+        }
         dispatch(createRun(run))
         return run
     }

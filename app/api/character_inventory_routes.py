@@ -20,16 +20,14 @@ def get_inv_char(char_id):
 def Update_inv(char_id):
     form = InvForm()
     user_id = current_user.to_dict()['id']
-    char_info = Character_info.query.filter(Character_info.id==char_id).first()
+    char_info = Character_info.query.get(char_id)
     char = char_info.get_gear_inv_id()
     if user_id == char['user_id']:
         form['csrf_token'].data = request.cookies['csrf_token']
         if form.validate_on_submit():
+            # print('form Valade!!!!!!!!!!!!!!!!',form.inv.data)
             inv = Inv.query.get(char['inv'])
-            inv.head = form.head.data
-            inv.chest = form.chest.data
-            inv.right = form.right.data
-            inv.left = form.left.data
+            inv.inv = form.inv.data
             db.session.commit()
             return inv.to_dict()
         print(form.errors)

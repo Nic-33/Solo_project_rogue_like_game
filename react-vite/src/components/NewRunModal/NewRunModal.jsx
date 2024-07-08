@@ -92,7 +92,7 @@ function NewRunModal() {
         const serverResponse = await dispatch(
             thunkCreateRun(data)
         );
-        // console.log(serverResponse)
+        console.log('SR:', serverResponse)
         navigate(`/data/${serverResponse.id}`)
         closeModal()
     };

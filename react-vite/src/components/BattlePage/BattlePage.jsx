@@ -124,6 +124,9 @@ function BattlePage(props) {
             damage = monster.patk - char.stats.pdef + getRandomIntInclusive(3, 5)
 
         }
+        if (damage <= 0) {
+            damage = 0
+        }
         char.curhp = char.curhp - damage
         if (target_char === 'char_1') setChar_1(char)
         if (target_char === 'char_2') setChar_2(char)
@@ -209,8 +212,8 @@ function BattlePage(props) {
         }
         turns.push(turnTrans)
         // if (turnTrans === 'char_1'&& )
-        console.log('Turn Order:', turns)
-        console.log('TransTurn:', turnTrans)
+        // console.log('Turn Order:', turns)
+        // console.log('TransTurn:', turnTrans)
         setTurnOrder(turns)
         return turnTrans
     }
@@ -241,9 +244,9 @@ function BattlePage(props) {
             damage = 0
         }
 
-        console.log('damage:', char.stats)
+        // console.log('damage:', char.stats)
         mon.curhp = mon.curhp - damage
-        console.log("current hp:", mon.curhp)
+        // console.log("current hp:", mon.curhp)
 
         let event = eventLog
         event.splice(1, 0, `${char.stats.name} attacked ${mon.name} doing ${damage} damage`)
@@ -271,6 +274,7 @@ function BattlePage(props) {
                 setMonAlive3(false)
             }
         }
+        battleOver()
         let current = nextTurn()
         console.log('current:', current)
         if (target_mon === 'mon_1') {
@@ -367,7 +371,6 @@ function BattlePage(props) {
                 }
             }
         }
-        battleOver()
     }
 
     function battleOver() {

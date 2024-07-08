@@ -32,8 +32,8 @@ export const thunkGetChar_inv = (char_id) => async (dispatch) => {
     // console.log('Char_inv Data Not OK!!!')
 }
 
-export const thunkUpdateChar_inv = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/inv`, {
+export const thunkUpdateChar_inv = (payload,char_id) => async (dispatch) => {
+    const response = await fetch(`/api/inv/${char_id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
