@@ -1,0 +1,9 @@
+.inventoryCont {
+    width: 400px;
+    height: 400px;
+    border: 10px ridge #2d1e2f;
+    background-image: url('../../Images/inventory.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px;
+}

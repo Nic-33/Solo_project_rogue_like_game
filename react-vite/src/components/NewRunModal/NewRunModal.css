@@ -84,3 +84,9 @@
     justify-content:center ;
 
 }
+
+.charSelectButtons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

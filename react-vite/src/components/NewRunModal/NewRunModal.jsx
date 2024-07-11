@@ -120,22 +120,24 @@ function NewRunModal() {
                         {display && <div className="unselectedChar">
                             <div className="unselectedCharName">{stats.name}</div>
                             {stats.avatarUrl && <img className="avatar" src={stats.avatarUrl} alt='avatar' />}
-                            <form onSubmit={selectCharacter}>
-                                <button className="unselectedCharSelect" type="submit" onClick={() => {
-                                    setSelChar(char)
-                                }}>Select</button>
-                            </form>
-                            <OpenModalMenuItem
-                                itemText="Edit Appearance"
-                                modalComponent={<UpdateCharacterModal props={char} />} />
-                            <OpenModalMenuItem
-                                itemText='Open Inventory'
-                                modalComponent={<GearModal props={char} />} />
-                            <form onSubmit={deleteCharacter}>
-                                <button className="delete" type="submit" onClick={() => {
-                                    setCharDel(char.id)
-                                }}>Delete Character</button>
-                            </form>
+                            <div className="charSelectButtons">
+                                <form onSubmit={selectCharacter}>
+                                    <button className="unselectedCharSelect" type="submit" onClick={() => {
+                                        setSelChar(char)
+                                    }}>Select</button>
+                                </form>
+                                <OpenModalMenuItem
+                                    itemText="Edit"
+                                    modalComponent={<UpdateCharacterModal props={char} />} />
+                                <OpenModalMenuItem
+                                    itemText='Open Inventory'
+                                    modalComponent={<GearModal props={char} />} />
+                                <form onSubmit={deleteCharacter}>
+                                    <button className="delete" type="submit" onClick={() => {
+                                        setCharDel(char.id)
+                                    }}>Delete Character</button>
+                                </form>
+                            </div>
                         </div>}</>)
                 })}
             </div>

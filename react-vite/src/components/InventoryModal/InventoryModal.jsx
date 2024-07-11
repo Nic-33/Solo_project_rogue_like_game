@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./InventoryModal.css";
-import { rightData, leftData, chestData, right_ability_data, left_ability_data } from "../../BTSCode/data";
+import { rightData, leftData, chestData } from "../../BTSCode/data";
 import { useEffect, useState } from "react";
 import { thunkGetChar_inv, thunkUpdateChar_inv } from "../../redux/character_inv";
 import OpenModalMenuItem from "./OpenModalMenuItem"
@@ -66,17 +66,19 @@ function InventoryModal(props) {
         data = headData
     }
     return <>
-        {loaded && <div>
-            <h1>{props.tag} menu</h1>
+        {loaded && <div className="inventoryCont">
+            <h1 className="invTitle">{props.tag} Inventory</h1>
             {inv[props.tag].map((item) => {
                 return <form onSubmit={(e) => equip(e, item)}>
                     <h2 key={data[item].name}>{data[item].name}</h2>
                     <button className="equipButton">Equip</button>
                 </form>
             })}
-            <OpenModalMenuItem
-                itemText='Back'
-                modalComponent={<GearModal props={char} />} />
+            <div className="backButton">
+                <OpenModalMenuItem
+                    itemText='Back'
+                    modalComponent={<GearModal props={char} />} />
+            </div>
         </div>}
     </>
 }

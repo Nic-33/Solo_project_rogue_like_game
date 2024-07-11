@@ -115,15 +115,10 @@ function BattlePage(props) {
 
 
         // console.log(`${monster.name} is attacking ${char.stats.name}`)
-        if (monster.name === 'Goblin') {
-            console.log('Goblin attacked')
-            damage = monster.patk - char.stats.pdef + getRandomIntInclusive(1, 3)
-        }
-        if (monster.name === 'Slime') {
-            console.log('Slime attacked')
-            damage = monster.patk - char.stats.pdef + getRandomIntInclusive(3, 5)
 
-        }
+        console.log(monster.name,' attacked')
+        damage = monster.patk - char.stats.pdef + getRandomIntInclusive(monster.maxDam, monster.minDam)
+
         if (damage <= 0) {
             damage = 0
         }

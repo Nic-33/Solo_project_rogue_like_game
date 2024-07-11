@@ -4,9 +4,10 @@ import { thunkGetChar_inv } from "../../redux/character_inv";
 import { thunkGetGear } from "../../redux/gear";
 import { useModal } from "../../context/Modal";
 import "./GearModal.css";
-import { rightData, leftData, chestData, right_ability_data, left_ability_data } from "../../BTSCode/data";
+import { rightData, leftData, chestData } from "../../BTSCode/data";
 import OpenModalMenuItem from "./OpenModalMenuItem"
 import InventoryModal from "../InventoryModal/InventoryModal";
+import NewRunModal from "../NewRunModal/NewRunModal";
 
 function GearModal(props) {
     const char_id = props.props.id
@@ -47,9 +48,9 @@ function GearModal(props) {
     const closeMenu = () => setShowMenu(false);
 
     return (<>
-        {gearLoaded && <>
-            <h1>Inventory</h1>
-            <form onSubmit={handleSubmit}>
+        {gearLoaded && <div className="gearCont">
+            <h1 className="gearTitle">Gear</h1>
+            <form className="gearForm" onSubmit={handleSubmit}>
                 <div className="chest">
                     <h2>Chest Armor</h2>
                     <h3>Equipped: {chestData[gearSlice.chest].name}</h3>
@@ -78,7 +79,12 @@ function GearModal(props) {
                     />
                 </div>
             </form>
-        </>}
+            <div className="backButton">
+                <OpenModalMenuItem
+                    itemText='Back'
+                    modalComponent={<NewRunModal />} />
+            </div>
+        </div>}
     </>
     );
 }
