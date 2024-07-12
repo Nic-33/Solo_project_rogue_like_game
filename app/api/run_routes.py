@@ -25,6 +25,7 @@ def create_a_run():
     form = RunForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print('runVAlade!!!!')
         new_run = Run(
             user_id=current_user.to_dict()['id'],
             char_1=form.char_1.data,
@@ -35,6 +36,7 @@ def create_a_run():
         db.session.add(new_run)
         db.session.commit()
         return new_run.to_dict()
+    print('run not VAlada!!!!')
     print(form.errors)
     return form.errors, 401
 

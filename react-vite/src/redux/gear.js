@@ -29,8 +29,8 @@ export const thunkGetGear = (char_id) => async (dispatch) => {
     // console.log('Gear Data Not OK!!!')
 }
 
-export const thunkUpdateGear = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/gear`, {
+export const thunkUpdateGear = (payload,char_id) => async (dispatch) => {
+    const response = await fetch(`/api/gear/${char_id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

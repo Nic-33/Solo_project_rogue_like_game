@@ -4,12 +4,13 @@ import { thunkGetChar_inv } from "../../redux/character_inv";
 import { thunkGetGear } from "../../redux/gear";
 import { useModal } from "../../context/Modal";
 import "./GearModal.css";
-import { rightData, leftData, chestData, right_ability_data, left_ability_data } from "../../BTSCode/data";
+import { rightData, leftData, chestData } from "../../BTSCode/data";
 import OpenModalMenuItem from "./OpenModalMenuItem"
 import InventoryModal from "../InventoryModal/InventoryModal";
+import NewRunModal from "../NewRunModal/NewRunModal";
 
 function GearModal(props) {
-    const { char_id } = props.state_char
+    const char_id = props.props.id
     const dispatch = useDispatch();
     const gearSlice = useSelector((state) => state.gear)
     const [gearLoaded, setGearLoaded] = useState(false)
@@ -47,16 +48,16 @@ function GearModal(props) {
     const closeMenu = () => setShowMenu(false);
 
     return (<>
-        {gearLoaded && <>
-            <h1>Inventory</h1>
-            <form onSubmit={handleSubmit}>
+        {gearLoaded && <div className="gearCont">
+            <h1 className="gearTitle">Gear</h1>
+            <form className="gearForm" onSubmit={handleSubmit}>
                 <div className="chest">
                     <h2>Chest Armor</h2>
                     <h3>Equipped: {chestData[gearSlice.chest].name}</h3>
                     <OpenModalMenuItem
                         itemText="change equipped item"
                         onItemClick={closeMenu}
-                        modalComponent={<InventoryModal tag={'chest'} currentEquip={chestData[gearSlice.chest]} />}
+                        modalComponent={<InventoryModal props={[props.props, char_id]} tag={'chest'} currentEquip={chestData[gearSlice.chest]} />}
                     />
                 </div>
                 <div className="leftHand">
@@ -65,7 +66,7 @@ function GearModal(props) {
                     <OpenModalMenuItem
                         itemText="change equipped item"
                         onItemClick={closeMenu}
-                        modalComponent={<InventoryModal tag={'left'} currentEquip={leftData[gearSlice.left]} />}
+                        modalComponent={<InventoryModal props={[props.props, char_id]} tag={'left'} currentEquip={leftData[gearSlice.left]} />}
                     />
                 </div>
                 <div className="rightHand">
@@ -74,11 +75,16 @@ function GearModal(props) {
                     <OpenModalMenuItem
                         itemText="change equipped item"
                         onItemClick={closeMenu}
-                        modalComponent={<InventoryModal tag={'right'} currentEquip={rightData[gearSlice.right]} />}
+                        modalComponent={<InventoryModal props={[props.props, char_id]} tag={'right'} currentEquip={rightData[gearSlice.right]} />}
                     />
                 </div>
             </form>
-        </>}
+            <div className="backButton">
+                <OpenModalMenuItem
+                    itemText='Back'
+                    modalComponent={<NewRunModal />} />
+            </div>
+        </div>}
     </>
     );
 }

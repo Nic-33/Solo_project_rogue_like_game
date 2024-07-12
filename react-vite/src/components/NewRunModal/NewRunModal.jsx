@@ -7,7 +7,7 @@ import { thunkCreateRun } from "../../redux/run";
 import { useNavigate } from "react-router-dom";
 import OpenModalMenuItem from './OpenModalMenuItem'
 import UpdateCharacterModal from "../UpdateCharacterModal/UpdateCharacterModal";
-
+import GearModal from "../GearModal/GearModal";
 
 function getRandomIntInclusive(min, max) {
     const minCeiled = Math.ceil(min);
@@ -92,7 +92,7 @@ function NewRunModal() {
         const serverResponse = await dispatch(
             thunkCreateRun(data)
         );
-        // console.log(serverResponse)
+        console.log('SR:', serverResponse)
         navigate(`/data/${serverResponse.id}`)
         closeModal()
     };
@@ -120,19 +120,24 @@ function NewRunModal() {
                         {display && <div className="unselectedChar">
                             <div className="unselectedCharName">{stats.name}</div>
                             {stats.avatarUrl && <img className="avatar" src={stats.avatarUrl} alt='avatar' />}
-                            <form onSubmit={selectCharacter}>
-                                <button className="unselectedCharSelect" type="submit" onClick={() => {
-                                    setSelChar(char)
-                                }}>Select</button>
-                            </form>
-                            <OpenModalMenuItem
-                                itemText="Edit"
-                                modalComponent={<UpdateCharacterModal props={char} />} />
-                            <form onSubmit={deleteCharacter}>
-                                <button className="delete" type="submit" onClick={() => {
-                                    setCharDel(char.id)
-                                }}>Delete Character</button>
-                            </form>
+                            <div className="charSelectButtons">
+                                <form onSubmit={selectCharacter}>
+                                    <button className="unselectedCharSelect" type="submit" onClick={() => {
+                                        setSelChar(char)
+                                    }}>Select</button>
+                                </form>
+                                <OpenModalMenuItem
+                                    itemText="Edit"
+                                    modalComponent={<UpdateCharacterModal props={char} />} />
+                                <OpenModalMenuItem
+                                    itemText='Open Inventory'
+                                    modalComponent={<GearModal props={char} />} />
+                                <form onSubmit={deleteCharacter}>
+                                    <button className="delete" type="submit" onClick={() => {
+                                        setCharDel(char.id)
+                                    }}>Delete Character</button>
+                                </form>
+                            </div>
                         </div>}</>)
                 })}
             </div>

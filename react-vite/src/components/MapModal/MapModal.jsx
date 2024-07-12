@@ -13,11 +13,11 @@ function MapModal(props) {
     const { closeModal } = useModal();
 
     useEffect(() => {
-        setMon_1()
+        setMon_1('')
         setMonAlive1(false)
-        setMon_2()
+        setMon_2('')
         setMonAlive2(false)
-        setMon_3()
+        setMon_3('')
         setMonAlive3(false)
         // setEventLog()
     }, [setMon_1, setMon_2, setMon_3, setMonAlive1, setMonAlive2, setMonAlive3])
